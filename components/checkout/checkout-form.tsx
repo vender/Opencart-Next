@@ -104,11 +104,11 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 			const confirm:any = await confirmOrder();
 			console.log(confirm);
 			
-			// if(confirm?.result?.payment) {
-			// 	router.push(confirm?.result?.payment);
-			// } else {
-			// 	alert('Ошибка оформления заказа. Попробуйте позже.')
-			// }
+			if(confirm?.result?.payment) {
+				router.push(confirm?.result?.payment);
+			} else {
+				alert('Ошибка оформления заказа. Попробуйте позже.')
+			}
 		}
 	}
 
