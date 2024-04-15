@@ -17,8 +17,8 @@ export default async function CheckoutPage() {
 	
   if (sessionId) {
     cart = await getCart();
-	userAddress = await getAddresses();
-	userInfo = await loggedIn();
+    userAddress = await getAddresses();
+    userInfo = await loggedIn();
   }
   
   return (

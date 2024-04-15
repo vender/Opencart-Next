@@ -99,15 +99,16 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 		setIsLoading(true);
 		
 		const setPayShip = await Promise.all([setPaymentMethod(input.payment_method, input.note), setShippingMethod(input.shipping_method)]) as any;
-
+		
 		if(!setPayShip?.reason) {
 			const confirm:any = await confirmOrder();
+			console.log(confirm);
 			
-			if(confirm?.result?.payment) {
-				router.push(confirm?.result?.payment);
-			} else {
-				alert('Ошибка оформления заказа. Попробуйте позже.')
-			}
+			// if(confirm?.result?.payment) {
+			// 	router.push(confirm?.result?.payment);
+			// } else {
+			// 	alert('Ошибка оформления заказа. Попробуйте позже.')
+			// }
 		}
 	}
 

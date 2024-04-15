@@ -344,14 +344,6 @@ export async function getOrders(start: number, limit:number) {
   {
     orders(start: ${start}, limit: ${limit}) {
       order_id
-      invoice_no
-      invoice_prefix
-      store {
-        store_id
-        name
-        url
-        ssl
-      }
       products {
         order_product_id
         order_id
@@ -364,36 +356,28 @@ export async function getOrders(start: number, limit:number) {
         tax
         reward
       }
-      store_name
       store_url
       customer_id
       firstname
       lastname
       email
       telephone
+      fax
       payment_firstname
       payment_lastname
       payment_company
       payment_address_1
-      payment_address_2
       payment_postcode
       payment_city
       payment_method
       payment_code
-      shipping_firstname
-      shipping_lastname
       shipping_company
-      shipping_address_1
-      shipping_address_2
-      shipping_postcode
-      shipping_city
       shipping_method
+      shipping_code
       comment
       total
-      order_status_id
       order_status
       commission
-      ip
       date_added
       date_modified
     }
@@ -966,7 +950,13 @@ export async function confirmOrder() {
           product_id
           name
           model
-          option
+          option {
+            name
+            option_id
+            product_option_id
+            type
+            value
+          }
           recurring
           quantity
           subtract
@@ -974,7 +964,7 @@ export async function confirmOrder() {
           total
           href
         }
-        vouchers
+        coupon
         totals {
           title
           text
@@ -985,6 +975,26 @@ export async function confirmOrder() {
   `, 'no-store',);
   
   return data?.confirmOrder
+}
+
+export async function orderSuccess() {
+  const data = await fetchAPI(`
+    mutation {
+      OrderSuccess
+    }
+  `, 'no-store',);
+  
+  return data.OrderSuccess
+}
+
+export async function PaymentRbs(order_id:string) {
+  const data = await fetchAPI(`
+    mutation {
+      Payment_Rbs(input: "${order_id}")
+    }
+  `, 'no-store',);
+  
+  return data.Payment_Rbs
 }
 
 export async function addCoupon(code:string) {

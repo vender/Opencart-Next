@@ -29,9 +29,6 @@ const OrderDetails: React.FC<{ className?: string; order: any }> = ({
 	className = "pt-10 lg:pt-12",
 	order
 }) => {
-	const isLoading = false;
-	
-	if (isLoading) return <p>Загрузка...</p>;
 
 	return (
 		<div className={className}>
@@ -50,7 +47,7 @@ const OrderDetails: React.FC<{ className?: string; order: any }> = ({
 					</tr>
 				</thead>
 				<tbody>
-					{order?.products.map((product:any, index:number) => (
+					{order?.products?.map((product:any, index:number) => (
 						<OrderItemCard key={index} product={product} />
 					))}
 				</tbody>
