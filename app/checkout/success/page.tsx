@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { getOrders, orderSuccess } from "#/lib";
 
 export default async function page() {
-    const success = await orderSuccess();
+    await orderSuccess();
     const lastOrder = await getOrders(0, 1);
 
     if(lastOrder?.length == 0){
