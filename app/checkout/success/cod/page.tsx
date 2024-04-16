@@ -3,11 +3,11 @@ import OrderInformation from "#/components/checkout/order-information";
 import { redirect } from 'next/navigation'
 import { PaymentCod, getOrders, orderSuccess } from "#/lib";
 
-export default async function page({searchParams}:any) {
+export default async function page() {
     const rbs = await PaymentCod();
     let lastOrder:any;
     
-    if(searchParams['orderId'] && rbs) {
+    if(rbs) {
         await orderSuccess();
         lastOrder = await getOrders(0, 1);
     } else {
