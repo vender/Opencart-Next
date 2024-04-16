@@ -13,7 +13,6 @@ export default async function page({searchParams}:any) {
         redirect('/');
     }    
 
-    
     return (
         <Container>
             <OrderInformation lastOrder={order} />

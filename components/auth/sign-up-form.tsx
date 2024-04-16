@@ -52,7 +52,7 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 		if(data?.result?.register && !jsonCheck(data?.result?.register)) {
 			setCookie('x-session-id', data?.result?.register, {
 				path: '/',
-				sameSite: 'strict',
+				// sameSite: 'strict',
 				secure: process.env.NODE_ENV === 'production'
 			});
 			router.push("/");

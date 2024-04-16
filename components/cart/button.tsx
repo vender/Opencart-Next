@@ -26,7 +26,7 @@ export default function CartButton({
     if (sessionIdUpdated) {
       setCookie('x-session-id', sessionId, {
         path: '/',
-        sameSite: 'strict',
+        // sameSite: 'none',
         secure: process.env.NODE_ENV === 'production'
       });
     }
