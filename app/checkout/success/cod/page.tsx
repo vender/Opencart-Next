@@ -1,22 +1,22 @@
 import Container from "#/components/ui/container";
 import OrderInformation from "#/components/checkout/order-information";
 import { redirect } from 'next/navigation'
-import { PaymentRbs, getOrder, orderSuccess } from "#/lib";
+import { PaymentCod, getOrders, orderSuccess } from "#/lib";
 
 export default async function page({searchParams}:any) {
-    const rbs = await PaymentRbs(searchParams['orderId']);
-    let order:any;
+    const rbs = await PaymentCod();
+    let lastOrder:any;
     
-    if(searchParams['orderId'] && rbs != 0) {
+    if(searchParams['orderId'] && rbs) {
         await orderSuccess();
-        order = await getOrder(rbs);
+        lastOrder = await getOrders(0, 1);
     } else {
         redirect('/');
     }    
 
     return (
         <Container>
-            <OrderInformation lastOrder={order} />
+            <OrderInformation lastOrder={lastOrder[0]} />
         </Container>
     )
 }

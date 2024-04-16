@@ -997,6 +997,16 @@ export async function PaymentRbs(order_id:string) {
   return data.Payment_Rbs
 }
 
+export async function PaymentCod() {
+  const data = await fetchAPI(`
+    mutation {
+      Payment_Cod
+    }
+  `, 'no-store',);
+  
+  return data.Payment_Cod
+}
+
 export async function addCoupon(code:string) {
   const data = await fetchAPI(`
   mutation {
