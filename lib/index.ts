@@ -503,6 +503,25 @@ export async function getBestsellerProducts() {
   return data?.latestProducts
 }
 
+export async function siteInfo() {
+  const data = await fetchAPI(`
+    {
+      siteInfo {
+        phpversion
+        mysqlversion
+        pluginversion
+        siteName
+        siteAddress
+        siteGeocode
+        siteEmail
+        sitePhone
+        siteLogo
+      }
+    }
+  `);
+  return data?.siteInfo
+}
+
 export async function getlatestProducts() {
   const data = await fetchAPI(`
   {
@@ -1054,7 +1073,7 @@ export async function setShippingMethod(code:string) {
 }
 
 export async function register(params:any) {
-  const {firstname, lastname, email, password, address, postcode, city} = params;
+  const {firstname, lastname, email, phone, password, address, postcode, city} = params;
   
   const data = await fetchAPI(`
     mutation {
@@ -1064,7 +1083,7 @@ export async function register(params:any) {
           firstname: "${firstname}"
           lastname: "${lastname}"
           email: "${email}"
-          telephone: "000"
+          telephone: ${phone}
           address_1: "${address}"
           address_2: ""
           country_id: 176

@@ -37,7 +37,7 @@ export default function ContactForm() {
 						variant="solid"
 					/>
 					<Input
-						labelKey="Email"
+						labelKey="Введите свой Email"
 						type="email"
 						{...register("email", {
 							required: "заполните поле",

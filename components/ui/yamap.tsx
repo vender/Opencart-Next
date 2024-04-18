@@ -1,5 +1,5 @@
 "use client"
-import { YMaps, Map, Clusterer, Placemark } from '@pbe/react-yandex-maps';
+import { YMaps, Map, Clusterer, Placemark, FullscreenControl, GeolocationControl, SearchControl } from '@pbe/react-yandex-maps';
 
 
 export default function YamapWrapper({locations}:any) {
@@ -26,6 +26,9 @@ export default function YamapWrapper({locations}:any) {
                         />
                     ))}
                 </Clusterer>
+                <FullscreenControl />
+                <GeolocationControl options={{ float: "left" }} />
+                <SearchControl options={{ float: "right" }} />
             </Map>
         </YMaps>
   )

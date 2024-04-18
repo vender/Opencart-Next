@@ -41,6 +41,7 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 				firstname: params.firstname,
 				lastname: params.lastname,
 				email: params.email,
+				phone: params.phone,
 				address: adres.value,
 				password: params.password,
 				city: adres?.data?.city,
@@ -52,7 +53,6 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 		if(data?.result?.register && !jsonCheck(data?.result?.register)) {
 			setCookie('x-session-id', data?.result?.register, {
 				path: '/',
-				// sameSite: 'strict',
 				secure: process.env.NODE_ENV === 'production'
 			});
 			router.push("/");
@@ -109,6 +109,15 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 									/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 								message: "не верный email",
 							},
+						})}
+						errorKey={errors.email?.message}
+					/>
+					<Input
+						labelKey="Номер телефона"
+						type="tel"
+						variant="solid"
+						{...register("phone", {
+							required: "Введите номер телефона"
 						})}
 						errorKey={errors.email?.message}
 					/>

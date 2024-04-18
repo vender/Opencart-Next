@@ -32,7 +32,7 @@ export default async function ProductCard({
 
 	return (
 		<Link href={`/product/${product.product_id}`} className="relative">
-			{product.special && <div className="absolute text-center z-10 right-1 top-1 bg-white text-black p-[0.7rem] lg:p-4 w-[40px] lg:w-[55px] h-[40px] lg:h-[55px] rounded-full font-bold text-lg lg:text-2xl leading-none lg:leading-none drop-shadow-[2px_-2px_1px_rgba(0,0,0,0.35)]">%</div>}
+			{product.special && <div className="absolute text-center z-10 right-1 top-1 bg-[#F91155] text-white p-[0.7rem] lg:p-4 w-[40px] lg:w-[55px] h-[40px] lg:h-[55px] font-bold text-lg lg:text-2xl leading-none lg:leading-none drop-shadow-[2px_-2px_1px_rgba(0,0,0,0.35)]">%</div>}
 			<div
 				className={clsx(
 					"group box-border overflow-hidden flex rounded-md cursor-pointer",

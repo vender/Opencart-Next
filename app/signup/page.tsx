@@ -5,12 +5,12 @@ async function page() {
   
   return (
     <>
-			<Container>
-				<div className="py-16 lg:py-20">
-					<SignUpForm className="w-500px" addressShow={true} />
-				</div>
-			</Container>
-		</>
+		<Container>
+			<div className="py-16 lg:py-20">
+				<SignUpForm className="w-500px" addressShow={true} />
+			</div>
+		</Container>
+	</>
   );
 }
 
