@@ -3,6 +3,10 @@ import AccountNav from "#/components/account/account-nav";
 import { redirect } from 'next/navigation'
 import { loggedIn } from '#/lib';
 
+export const metadata = {
+	title: 'Личный кабинет ilMonte',
+}
+
 export default async function AccountLayout({ children }:any) {
 	const isLogedIn = await loggedIn();
 	

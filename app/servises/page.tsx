@@ -3,6 +3,10 @@ import YamapWrapper from "#/components/ui/yamap";
 import { getLocations, getInformationPage } from '#/lib';
 import Prose from "#/components/prose";
 
+export const metadata = {
+	title: 'Сервисные центры',
+}
+
 async function page({ params }: { params: any }) {
   const pageInfo = await getInformationPage(8);
   const locations = await getLocations();

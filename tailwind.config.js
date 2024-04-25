@@ -111,9 +111,13 @@ module.exports = {
 	future: {
 		hoverOnlyWhenSupported: true
 	},
+	corePlugins: {
+		aspectRatio: false,
+	},
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('tailwindcss-animated'),
+		require('@tailwindcss/aspect-ratio'),
 		plugin(({ matchUtilities, theme }) => {
 			matchUtilities(
 				{

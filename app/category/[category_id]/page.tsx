@@ -4,7 +4,6 @@ import ProductGrid from "#/components/product/product-grid";
 import { getCategory, getProducts } from "#/lib";
 import ShopFilters from "#/components/ui/filters";
 import SearchTopBar from "#/components/ui/top-bar";
-import { removeAttrib } from "#/lib/attrib-filter";
 import clsx from "clsx";
 
 type Props = {
@@ -55,12 +54,11 @@ export default async function Category({ params, searchParams }: any) {
   products &&
     products.map((item: any) => {
       item.attributes?.map((i: any) => {
-        // console.log();
         if(i.status == 1) {
           i.attribute.map((i: any) => {
-            if (!removeAttrib.find((ra) => i.attribute_id == ra)) {
+            // if (!removeAttrib.find((ra) => i.attribute_id == ra)) {
               attribute_groups.push([i.attribute_id, i.name]);
-            }
+            // }
           });
         }
       });
@@ -69,17 +67,17 @@ export default async function Category({ params, searchParams }: any) {
   products.map((prod: any) => {
     prod.attributes?.map((group: any) => {
       group.attribute.map((attr: any) => {
-        if (!removeAttrib.includes(Number(attr.attribute_id))) {
-          if (attr.text) {
+        // if (!removeAttrib.includes(Number(attr.attribute_id))) {
+          if (attr.text && attr.status != 0) {
             attribs.push(attr);
-
+            
             allParams.map((param: any) => {
               if (attr.text == param[0]) {
                 filterdProd.push(prod.product_id);
               }
             });
           }
-        }
+        // }
       });
     });
   });
@@ -93,7 +91,6 @@ export default async function Category({ params, searchParams }: any) {
           {attribs.length ? (
             <div className="flex-shrink-0 pe-24 hidden lg:block w-96">
               <ShopFilters
-                products={products}
                 attribute_groups={uniqArray(attribute_groups)}
                 attribs={uniqArray(attribs)}
               />

@@ -2,6 +2,21 @@ import Container from "#/components/ui/container";
 import { getInformationPage } from "#/lib";
 import Prose from "#/components/prose";
 
+type Props = {
+  params: { id: number;};
+};
+
+export async function generateMetadata({ params }: Props) {
+  const pageInfo = await getInformationPage(params.id);
+
+  return {
+    title: pageInfo.title,
+    openGraph: {
+      description: pageInfo.title,
+    },
+  };
+}
+
 async function page({ params }: { params: any }) {
   const pageInfo = await getInformationPage(params.id);
   // const description = product?.description.replace(/(<([^>]+)>)|(&lt;...|gt;)|&/gi, "");

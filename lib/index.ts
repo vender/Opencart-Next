@@ -301,6 +301,7 @@ export async function getProducts(parent: number) {
           attribute_id
           name
           text
+          status
         }
       }
       product_id
@@ -516,10 +517,32 @@ export async function siteInfo() {
         siteEmail
         sitePhone
         siteLogo
+        siteIcon
       }
     }
   `);
   return data?.siteInfo
+}
+
+export async function footers() {
+  const data = await fetchAPI(`
+    {
+      footers {
+        footer_id
+        name
+        status
+        items {
+          title
+          link
+          image
+          sort_order
+          footer_image_id
+          language_id
+        }
+      }
+    }
+  `);
+  return data?.footers
 }
 
 export async function getlatestProducts() {
@@ -606,6 +629,7 @@ export async function getProduct(id: number) {
             attribute_id
             name
             text
+            status
           } 
         }
         options {
@@ -762,6 +786,51 @@ export async function getInformationPage(id: number) {
     }
   `);
   return data?.information
+}
+
+export async function searchProduct(search:any) {
+  const data = await fetchAPI(`
+    {
+      products(
+        filter_name: "${search}"
+        filter_description: "false"
+        start: 0
+        limit: 300
+      ) {
+          product_id
+          name
+          description
+          meta_title
+          meta_description
+          meta_keyword
+          tag
+          model
+          sku
+          upc
+          mpn
+          quantity
+          image
+          in_stock
+          price
+          special
+          formatted_price
+          formatted_special
+          weight
+          rating
+          review_count
+          minimum
+          sort_order
+          status
+          wishlist
+          images {
+            product_image_id
+            image
+            sort_order
+          }
+      }
+    }
+  `);
+  return data?.products
 }
 
 export async function LogIn(email: string, password: string) {

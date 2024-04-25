@@ -1,38 +1,43 @@
+import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
 	className?: string;
-	data: {
-		widgetTitle?: string;
-		lists: {
-			id: string;
-			path?: string;
-			title: string;
-			icon?: any;
-		}[];
+	widget: {
+		footer_id?: number;
+		name?: string;
+		items?: [];
 	};
 }
 
-export default function WidgetLink({ className, data }:Props) {
-	const { widgetTitle, lists } = data;
+interface List {
+	title?: string;
+	link?: string;
+	image?: string;
+	sort_order?: any;
+	footer_image_id?: string;
+	language_id?: string;
+}
+
+export default function WidgetLink({ className, widget }:Props) {
 	
 	return (
 		<div className={`${className}`}>
 			<h4 className="text-heading text-sm md:text-base xl:text-lg font-semibold mb-5 2xl:mb-6 3xl:mb-7">
-				{`${widgetTitle}`}
+				{`${widget?.name}`}
 			</h4>
 			<ul className="text-xs lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5">
-				{lists?.map((list) => (
+				{widget?.items?.map((list:List, idx:number) => (
 					<li
-						key={`widget-list--key${list?.id}`}
+						key={`widget-list--key${idx}`}
 						className="flex items-baseline"
 					>
-						{list?.icon && (
+						{list?.image && (
 							<span className="me-3 relative top-0.5 lg:top-1 text-sm lg:text-base">
-								{list.icon}
+								<Image src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${list?.image}`} alt="" width={16} height={16} />
 							</span>
 						)}
-						<Link href={list?.path ? list.path : "#!"} className="transition-colors duration-200 hover:text-black">
+						<Link href={list?.link ? list.link : "#!"} className="transition-colors duration-200 hover:text-black">
 							{`${list?.title}`}
 						</Link>
 					</li>

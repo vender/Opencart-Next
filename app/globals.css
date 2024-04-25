@@ -465,3 +465,26 @@
     border-color: transparent;
     background-color: currentColor
 }
+
+.drawer-search.open {
+	@apply fixed block visible opacity-100 top-0;
+	transform: translate(-50%, 0);
+}
+
+.overlay {
+	background-color: rgba(0, 0, 0, 0.35);
+	z-index: 21;
+	visibility: hidden;
+	@apply w-full;
+	@apply h-full;
+	@apply flex;
+	@apply fixed;
+	@apply opacity-0;
+	@apply top-0;
+	@apply start-0;
+	transition: 0.35s ease-in-out;
+}
+.overlay.open {
+	@apply opacity-100;
+	visibility: visible;
+}

@@ -5,7 +5,7 @@ import { YMaps, Map, Clusterer, Placemark, FullscreenControl, GeolocationControl
 export default function YamapWrapper({locations}:any) {
     
   return (
-        <YMaps>
+        <YMaps query={{ apikey: 'e65cc82e-fcae-451f-87ce-0a22bcd9f2ef', suggest_apikey: '26ff3f64-a214-4bbd-af28-bb13c3272ab7' }}>
             <Map defaultState={{ center: [53.66, 75.06], zoom: 3 }} width="100%" height="500px" >
                 <Clusterer
                     options={{

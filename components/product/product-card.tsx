@@ -31,16 +31,15 @@ export default async function ProductCard({
 	const isLogedIn = await loggedIn();
 
 	return (
-		<Link href={`/product/${product.product_id}`} className="relative">
-			{product.special && <div className="absolute text-center z-10 right-1 top-1 bg-[#F91155] text-white p-[0.7rem] lg:p-4 w-[40px] lg:w-[55px] h-[40px] lg:h-[55px] font-bold text-lg lg:text-2xl leading-none lg:leading-none drop-shadow-[2px_-2px_1px_rgba(0,0,0,0.35)]">%</div>}
+		<>
 			<div
 				className={clsx(
-					"group box-border overflow-hidden flex rounded-md cursor-pointer",
+					"group box-border overflow-hidden flex rounded-md cursor-pointer relative",
 					{
-						"pe-0 pb-2 lg:pb-3 flex-col items-start bg-white transition duration-200 ease-in-out transform hover:-translate-y-1 hover:md:-translate-y-1.5 hover:shadow-product":
+						"pe-0 pb-2 lg:pb-3 flex-col items-start bg-white transition duration-200 ease-in-out transform hover:-translate-y-1 hover:md:-translate-y-1.5":
 							variant === "grid",
 						"pe-0 md:pb-1 flex-col items-start bg-white": variant === "gridSlim",
-						"items-center bg-transparent border border-gray-100 transition duration-200 ease-in-out transform hover:-translate-y-1 hover:shadow-listProduct":
+						"items-center bg-transparent border border-gray-100 transition duration-200 ease-in-out transform hover:-translate-y-1":
 							variant === "listSmall",
 						"flex-row items-center transition-transform ease-linear bg-gray-200 pe-2 lg:pe-3 2xl:pe-4":
 							variant === "list",
@@ -50,9 +49,10 @@ export default async function ProductCard({
 				role="button"
 				title={product?.name}
 			>
+				{product.special && <div className="absolute text-center z-10 right-1 top-1 bg-[#F91155] text-white p-[0.7rem] lg:p-4 w-[40px] lg:w-[55px] h-[40px] lg:h-[55px] font-bold text-lg lg:text-2xl leading-none lg:leading-none">%</div>}
 				<div
 					className={clsx(
-						"flex",
+						"flex relative w-full h-[200px] sm:h-[200px] md:h-[250px] lg:h-[320px]",
 						{
 							"mb-3 md:mb-3.5": variant === "grid",
 							"mb-3 md:mb-3.5 pb-0": variant === "gridSlim",
@@ -62,21 +62,24 @@ export default async function ProductCard({
 						imageContentClassName
 					)}
 				>
-					<Image
-						src={product?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${product?.image}` : placeholderImage}
-						width={imgWidth}
-						height={imgHeight}
-						loading={imgLoading}
-						alt={product?.name || "Product Image"}
-						className={clsx("bg-gray-300 object-cover rounded-s-md", {
-							"w-full aspect-square rounded-md transition duration-200 ease-in group-hover:rounded-b-none":
-								variant === "grid",
-							"rounded-md transition duration-150 ease-linear transform group-hover:scale-105":
-								variant === "gridSlim",
-							"rounded-s-md transition duration-200 ease-linear transform group-hover:scale-105":
-								variant === "list",
-						})}
-					/>
+					<Link href={`/product/${product.product_id}`} className="relative">
+						<Image
+							src={product?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${product?.image}` : placeholderImage}
+							width={imgWidth}
+							height={imgHeight}
+							// fill={true}
+							loading={imgLoading}
+							alt={product?.name || "Product Image"}
+							className={clsx("object-contain rounded-s-md", {
+								"w-full h-full object-center rounded-md transition duration-200 ease-in group-hover:rounded-b-none":
+									variant === "grid",
+								"rounded-md transition duration-150 ease-linear transform group-hover:scale-105":
+									variant === "gridSlim",
+								"rounded-s-md transition duration-200 ease-linear transform group-hover:scale-105":
+									variant === "list",
+							})}
+						/>
+					</Link>
 				</div>
 				<div
 					className={clsx(
@@ -124,6 +127,6 @@ export default async function ProductCard({
 					</div>
 				</div>
 			</div>
-		</Link>
+		</>
 	)
 }

@@ -8,6 +8,36 @@ import DNSIcon from "../icons/dns";
 export const footer = {
 	widgets: [
 		{
+			id: 6,
+			widgetTitle: "Магазины",
+			lists: [
+				{
+					id: 1,
+					title: "Ozon",
+					icon: <OzonIcon/>,
+					path: "https://www.ozon.ru/brand/il-monte-85285187",
+				},
+				{
+					id: 2,
+					title: "Wildberries",
+					icon: <WBIcon/>,
+					path: "https://www.wildberries.ru/brands/il-monte",
+				},
+				{
+					id: 3,
+					title: "DNS",
+					icon: <DNSIcon/>,
+					path: "https://www.dns-shop.ru/product/87dc97309aef1804/elektriceskij-duhovoj-skaf-il-monte-bo-70-an-rustico-belyj",
+				},
+				{
+					id: 4,
+					title: "Мвидео",
+					icon: <MvideoIcon/>,
+					path: "https://www.mvideo.ru/vstraivaemaya-tehnika-4/vstraivaemye-paneli-4108/f/category=vstraivaemye-gazovye-paneli-679/brand=il-monte",
+				},
+			],
+		},
+		{
 			id: 1,
 			widgetTitle: "Соцсети",
 			lists: [
@@ -55,36 +85,6 @@ export const footer = {
 					title: "Сервисные центры",
 					path: "/servises",
 				}
-			],
-		},
-		{
-			id: 6,
-			widgetTitle: "Магазины",
-			lists: [
-				{
-					id: 1,
-					title: "Ozon",
-					icon: <OzonIcon/>,
-					path: "https://www.ozon.ru/brand/il-monte-85285187",
-				},
-				{
-					id: 2,
-					title: "Wildberries",
-					icon: <WBIcon/>,
-					path: "https://www.wildberries.ru/brands/il-monte",
-				},
-				{
-					id: 3,
-					title: "DNS",
-					icon: <DNSIcon/>,
-					path: "https://www.dns-shop.ru/product/87dc97309aef1804/elektriceskij-duhovoj-skaf-il-monte-bo-70-an-rustico-belyj",
-				},
-				{
-					id: 4,
-					title: "Мвидео",
-					icon: <MvideoIcon/>,
-					path: "https://www.mvideo.ru/vstraivaemaya-tehnika-4/vstraivaemye-paneli-4108/f/category=vstraivaemye-gazovye-paneli-679/brand=il-monte",
-				},
 			],
 		},
 	],

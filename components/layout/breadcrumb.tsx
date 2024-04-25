@@ -67,7 +67,7 @@ export default function Breadcrumb({ separator = "/", parent, title }:{ separato
 				Главная
 			</Link>
 
-			{parent.category_id && 
+			{parent?.category_id && 
 				<Link
 					href={`/category/${parent.category_id}`}
 				>

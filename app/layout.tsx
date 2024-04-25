@@ -4,7 +4,8 @@ import Navbar from '#/components/navbar';
 import Footer from '#/components/footer/footer';
 import MobileNavigation from "#/components/navbar/mobile-navigation";
 import { Toaster } from 'react-hot-toast';
-import { getCategories, getInformations, loggedIn } from '#/lib';
+import type { Metadata, ResolvingMetadata } from 'next'
+import { getCategories, getInformations, loggedIn, siteInfo, footers } from '#/lib';
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic-ext'],
@@ -12,11 +13,22 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+type Props = {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
 export const revalidate = 60;
 
-export const metadata = {
-  title: "ilMonte Shop",
-};
+export async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const siteInfoData = await siteInfo();
+  return {
+    title: siteInfoData.siteName
+  }
+}
 
 async function getCategoryPages(categories:any){
   return categories.map((cat:any) => {
@@ -45,6 +57,8 @@ export default async function RootLayout({
   let infoPages = await getInformations();
   const subMenu = await getCategoryPages(categories);
   const isLogedIn = await loggedIn();
+  const siteInfoData = await siteInfo();
+  const footer_data = await footers();
 
   const infoPagesFiltered = infoPages.map((infoPage:any) =>{
     return infoPage.top_menu && {
@@ -71,10 +85,10 @@ export default async function RootLayout({
       <head />
       <body>
         <div className='flex flex-col min-h-screen'>
-          <Navbar mainMenu={mainMenu} infoPages={infoPages} isLogedIn={isLogedIn} />
+          <Navbar mainMenu={mainMenu} infoPages={infoPages} isLogedIn={isLogedIn} siteInfo={siteInfoData} />
           <main className='relative flex-grow'>{children}</main>
-          <Footer infoPages={infoPages} />
-          <MobileNavigation mainMenu={mainMenu} infoPages={infoPages} isLogedIn={isLogedIn} />
+          <Footer infoPages={infoPages} widgets={footer_data}/>
+          <MobileNavigation mainMenu={mainMenu} infoPages={infoPages} isLogedIn={isLogedIn} siteInfo={siteInfoData} />
         </div>
         <Toaster />
       </body>

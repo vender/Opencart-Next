@@ -1,48 +1,11 @@
 import { useState } from "react";
-import { siteSettings } from "#/lib/site-settings";
 import { IoIosArrowDown } from "react-icons/io";
 import Logo from "#/components/ui/logo";
-import {
-	IoLogoInstagram,
-	IoLogoTwitter,
-	IoLogoFacebook,
-	IoLogoYoutube,
-	IoClose,
-} from "react-icons/io5";
+import {IoClose} from "react-icons/io5";
 import Link from "next/link";
 
-const social = [
-	{
-		id: 0,
-		link: "https://www.facebook.com/redqinc/",
-		icon: <IoLogoFacebook />,
-		className: "facebook",
-		title: "text-facebook",
-	},
-	{
-		id: 1,
-		link: "https://twitter.com/redqinc",
-		icon: <IoLogoTwitter />,
-		className: "twitter",
-		title: "text-twitter",
-	},
-	{
-		id: 2,
-		link: "https://www.youtube.com/channel/UCjld1tyVHRNy_pe3ROLiLhw",
-		icon: <IoLogoYoutube />,
-		className: "youtube",
-		title: "text-youtube",
-	},
-	{
-		id: 3,
-		link: "https://www.instagram.com/redqinc/",
-		icon: <IoLogoInstagram />,
-		className: "instagram",
-		title: "text-instagram",
-	},
-];
 
-export default function MobileMenuTree({cartIsOpen, setCartIsOpen, mainMenu}:any) {
+export default function MobileMenuTree({setCartIsOpen, mainMenu, siteInfo}:any) {
 	const [activeMenus, setActiveMenus] = useState<any>([]);
 	
 	const handleArrowClick = (menuName: string) => {
@@ -133,9 +96,9 @@ export default function MobileMenuTree({cartIsOpen, setCartIsOpen, mainMenu}:any
 
 	return (
 		<>
-			<div className="flex flex-col justify-between w-full h-full">
+			<div className="flex flex-col w-full h-full">
 				<div className="w-full border-b border-gray-100 flex justify-between items-center relative ps-5 md:ps-7 flex-shrink-0 py-0.5">
-					<Logo className='inline-flex focus:outline-none' href={siteSettings.logo.href} width={siteSettings.logo.width} height={siteSettings.logo.height} />
+					<Logo className='inline-flex focus:outline-none' siteInfo={siteInfo} width={100} height={50} />
 
 					<button
 						className="flex text-2xl items-center justify-center text-gray-500 px-4 md:px-5 py-6 lg:py-8 focus:outline-none transition-opacity hover:opacity-60"
@@ -166,19 +129,6 @@ export default function MobileMenuTree({cartIsOpen, setCartIsOpen, mainMenu}:any
 					</ul>
 				</div>
 
-				<div className="flex items-center justify-center bg-white border-t border-gray-100 px-7 flex-shrink-0 space-s-1">
-					{social?.map((item, index) => (
-						<a
-							href={item.link}
-							className={`text-heading p-5 opacity-60 first:-ms-4 transition duration-300 ease-in hover:opacity-100 ${item.className}`}
-							target="_blank"
-							key={index}
-						>
-							<span className="sr-only">{item.title}</span>
-							{item.icon}
-						</a>
-					))}
-				</div>
 			</div>
 		</>
 	);

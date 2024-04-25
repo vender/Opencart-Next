@@ -11,7 +11,7 @@ export default function ProductGrid({
   filterdProd,
 }: ProductGridProps) {
 
-  if (filterdProd.length) {
+  if (filterdProd?.length) {
     products = products.filter((product: any) =>
       filterdProd.find((id: any) => id == product.product_id)
     );

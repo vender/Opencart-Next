@@ -1,4 +1,3 @@
-import {removeProductAttrib} from "#/lib/attrib-filter";
 
 export default function Attriblist({content}:any) {
     
@@ -9,7 +8,7 @@ export default function Attriblist({content}:any) {
                 <div className="font-bold">{item.name}</div>
                 <div className="">
                     {item.attribute && item.attribute.map((attrib:any) => {
-                        return !removeProductAttrib.includes(parseInt(attrib.attribute_id)) && (
+                        return attrib?.status != 0 && (
                             <dl key={attrib.attribute_id} className="flex">
                                 <dt className="w-1/2 relative before:content-[''] before:absolute before:w-full before:border-dotted before:border before:border-[#ccd6e499] before:bottom-2">
                                     <span className="pr-1 bg-white inline relative text-[#001a3499]">

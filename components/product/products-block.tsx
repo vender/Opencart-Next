@@ -1,9 +1,6 @@
 import React from "react";
 import SectionHeader from "#/components/layout/section-header";
 import ProductCard from "#/components/product/product-card";
-// import ProductFeedLoader from "@components/ui/loaders/product-feed-loader";
-// import { Product } from "@framework/types";
-// import Alert from "@components/ui/alert";
 
 interface ProductsProps {
 	sectionHeading: string;

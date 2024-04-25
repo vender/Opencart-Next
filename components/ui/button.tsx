@@ -1,13 +1,15 @@
 import clsx from "clsx";
+import { title } from "process";
 import React, { ButtonHTMLAttributes } from "react";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	className?: string;
-	variant?: "flat" | "slim";
+	variant?: "flat" | "slim" | "notify";
 	active?: boolean;
 	type?: "submit" | "reset" | "button";
 	loading?: boolean;
 	disabled?: boolean;
+	title?: string;
 }
 
 export default function Button({
@@ -40,6 +42,7 @@ export default function Button({
 			// ref={ref}
 			className={rootClassName}
 			disabled={disabled}
+			title={title}
 			{...rest}
 		>
 			{children}

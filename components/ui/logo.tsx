@@ -1,11 +1,11 @@
 import Link from "next/link";
-import LogoIcon from '#/components/icons/logoIcon';
 import clsx from "clsx";
+import Image from "next/image";
 
-export default function Logo({className = '', href, width, height}:{className: string, href: string, width: number, height: number}) {
+export default function Logo({className = '', siteInfo, width, height}:{className: string, siteInfo: any, width: number, height: number}) {
   return (
-        <Link href={href} aria-label="На главную" className={clsx(className, 'transition-transform hover:scale-105')}>
-            <LogoIcon width={width} height={height} />
-        </Link>
+      <Link href="/" aria-label="На главную" className={clsx(className, 'transition-transform hover:scale-105')}>
+          <Image src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${siteInfo?.siteLogo}`} className="max-w-fit" alt="На главную" width={width} height={height} />
+      </Link>
   )
 }
