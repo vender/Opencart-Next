@@ -52,7 +52,7 @@ export default async function ProductCard({
 				{product.special && <div className="absolute text-center z-10 right-1 top-1 bg-[#F91155] text-white p-[0.7rem] lg:p-4 w-[40px] lg:w-[55px] h-[40px] lg:h-[55px] font-bold text-lg lg:text-2xl leading-none lg:leading-none">%</div>}
 				<div
 					className={clsx(
-						"flex relative w-full h-[200px] sm:h-[200px] md:h-[250px] lg:h-[320px]",
+						"flex relative w-full justify-center h-[200px] sm:h-[200px] md:h-[250px] lg:h-[320px]",
 						{
 							"mb-3 md:mb-3.5": variant === "grid",
 							"mb-3 md:mb-3.5 pb-0": variant === "gridSlim",
