@@ -36,7 +36,7 @@ function ReviewItem({review}:any) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  
   return (
       <div key={review.review_id} className='mb-3 pt-3'>
           <div className='flex justify-between'>
@@ -49,8 +49,8 @@ function ReviewItem({review}:any) {
           <Modal
             open={open}
             onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-description"
           >
               <Box sx={style}>
                 <div className='flex justify-center'>
