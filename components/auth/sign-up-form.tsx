@@ -2,6 +2,7 @@
 import Input from "#/components/ui/input";
 import PasswordInput from "#/components/ui/password-input";
 import Button from "#/components/ui/button";
+import InputMask from "react-input-mask";
 import { Controller, useForm } from "react-hook-form";
 import { AddressSuggestions } from 'react-dadata';
 import { useRouter, redirect } from 'next/navigation';
@@ -15,6 +16,13 @@ function jsonCheck(jsonString:any) {
 		return false;
 	}
 }
+
+export const clearTel = (tel:any) => tel.replace(/[^0-9]/g, '');
+
+const isNotFilledTel = (v:any) => {
+	const clearedTel = clearTel(v);
+	return clearedTel.length < 11 ? 'Введите номер телефона' : undefined;
+};
 
 export default function SignUpForm({addressShow, className = ''}:{addressShow:boolean, className: string}) {
 	const [isLoading, setIsLoading] = useState(false);
@@ -65,11 +73,13 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 	}
 
 	function onSubmit(input:any) {
-		if(adres !== undefined) {
-			signUp(input);
-		} else {
-			alert("Заполните полный адрес")
-		}
+		console.log(input);
+		
+		// if(adres !== undefined) {
+		// 	signUp(input);
+		// } else {
+		// 	alert("Заполните полный адрес")
+		// }
 	}
 	return (
 		<div className={`py-5 px-5 sm:px-8 bg-white mx-auto rounded-lg ${className} border border-gray-300`}>
@@ -112,16 +122,34 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 						})}
 						errorKey={errors.email?.message}
 					/>
-					<Input
-						labelKey="Номер телефона"
-						type="tel"
-						variant="solid"
+					
+					<Controller
+						control={control}
 						{...register("phone", {
 							required: "Введите номер телефона"
 						})}
-						errorKey={errors.email?.message}
+						rules={{
+							validate: {
+								inputTelRequired: isNotFilledTel,
+							},
+						}}
+						errorKey={errors.phone?.message}
+						render={({ field }) => (
+							<InputMask
+								value={field.value}
+								mask="+7 (999) 999-99-99"
+								maskPlaceholder={'_'}
+								alwaysShowMask
+								onChange={(e:any) => {
+									e.persist();
+									field.onChange(e.target.value);
+								}}
+							>
+								<Input name="phone" labelKey="Номер телефона" type="tel" variant="solid" />
+							</InputMask>
+						)}
 					/>
-					
+					{errors.phone && <p className="my-2 text-xs text-red-500">{errors.phone?.message}</p>}
 
 					{addressShow && 
 					<>

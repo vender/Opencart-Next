@@ -24,6 +24,7 @@ export default function ProductGallery({ product }: any) {
         className="product-gallery"
         buttonClassName="hidden"
         autoHeight={true}
+        // arrows={true}
       >
         {images?.map((item: any, index: number) => (
           <SwiperSlide key={`product-gallery-key-${index}`}>

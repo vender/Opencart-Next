@@ -94,7 +94,7 @@ export default async function ProductCard({
 				>
 					
 						<h2
-							className={clsx("text-heading font-semibold truncate mb-1", {
+							className={clsx("text-heading font-semibold mb-1", {
 								"text-sm md:text-base": variant === "grid",
 								"md:mb-1.5 text-sm sm:text-base md:text-sm lg:text-base xl:text-lg":
 									variant === "gridSlim",
@@ -103,12 +103,12 @@ export default async function ProductCard({
 									variant === "list",
 							})}
 						>
-							{product?.name}
+							{product?.name && product?.name.substring(0, 40)}
 						</h2>
 					{product?.quantity != 0 ? (
 						<>
 							<p className="text-body text-xs lg:text-sm leading-normal xl:leading-relaxed max-w-[250px] truncate" title={product?.sku}>
-								артикул: {product?.sku}
+								артикул: {product?.model}
 							</p>
 							<div className='font-semibold text-sm sm:text-base mt-1.5 flex flex-wrap gap-x-2 lg:text-lg lg:mt-2.5 text-heading'>
 								<span className="inline-block">{product.special ? product.formatted_special : product.formatted_price}</span>

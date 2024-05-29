@@ -38,6 +38,9 @@ export default function Carousel({
 	const prevRef = useRef(null);
 	const nextRef = useRef(null);
 	
+	console.log(prevRef);
+	
+
 	return (
 		<div className={`carouselWrapper relative ${className} ${paginationVariant === "circle" ? "dotsCircle" : ""}`} >
 			<Swiper
@@ -48,8 +51,8 @@ export default function Carousel({
 				modules={[Pagination, Navigation, Autoplay]}
 				pagination={pagination}
 				navigation={{
-					prevEl: prevRef.current ? prevRef.current : undefined,
-					nextEl: nextRef.current ? nextRef.current : undefined,
+					prevEl: prevRef?.current,
+					nextEl: nextRef?.current
 				}}
 				onBeforeInit={(swiper: any) => {
 					swiper.params.navigation.prevEl = prevRef.current;

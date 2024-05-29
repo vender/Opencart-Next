@@ -10,6 +10,7 @@ export type CartItem = {
 export type Product = {
   product_id: number;
   name: string;
+  model: string;
   image: string;
   sku: string;
   description: string;

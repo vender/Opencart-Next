@@ -2,6 +2,7 @@
 import BannerCard from "#/components/layout/banner-card";
 import { SwiperSlide } from 'swiper/react';
 import Carousel from "#/components/ui/carousel";
+import { useEffect, useState } from "react";
 
 const breakpoints = {
 	"1025": {
@@ -22,6 +23,16 @@ export default function BannerCarouselBlock({
 	className = "mb-12 md:mb-12 lg:mb-14 pb-0.5 xl:pb-1.5",
 	banners
 }:any) {
+	
+	const isClient = typeof window === 'object';
+	function getSize() {
+		return isClient ? { width: window.innerWidth, height: window.innerHeight } : { width: undefined, height: undefined };
+	}
+	const [windowSize, setWindowSize] = useState() as any;
+
+	useEffect(() => {
+		setWindowSize(getSize());
+	}, [windowSize]);
 
 	return (
 		<div className={className}>
@@ -33,7 +44,7 @@ export default function BannerCarouselBlock({
 						autoplay={{ delay: 5000 }}
 						className="mx-0"
 						pagination={false}
-						arrows={window.innerWidth > 480 ? false: true}
+						arrows={windowSize > 480 ? false: true}
 					>
 						{banners?.map((banner: any) => (
 							<SwiperSlide key={`banner-key-${banner?.banner_image_id}`}>
