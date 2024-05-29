@@ -25,14 +25,13 @@ export default function BannerCarouselBlock({
 }:any) {
 	
 	const isClient = typeof window === 'object';
-	function getSize() {
-		return isClient ? { width: window.innerWidth, height: window.innerHeight } : { width: undefined, height: undefined };
-	}
-	const [windowSize, setWindowSize] = useState() as any;
+	const getWindowSize = () => isClient ? window?.innerWidth : 0;
+	// console.log(getWindowSize());
+	
+	// useEffect(() => {
 
-	useEffect(() => {
-		setWindowSize(getSize());
-	}, [windowSize]);
+	// 	setWindowSize(getSize());
+	// }, [windowSize]);
 
 	return (
 		<div className={className}>
@@ -44,7 +43,7 @@ export default function BannerCarouselBlock({
 						autoplay={{ delay: 5000 }}
 						className="mx-0"
 						pagination={false}
-						arrows={windowSize > 480 ? false: true}
+						arrows={true}
 					>
 						{banners?.map((banner: any) => (
 							<SwiperSlide key={`banner-key-${banner?.banner_image_id}`}>

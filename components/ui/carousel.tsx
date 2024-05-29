@@ -36,10 +36,7 @@ export default function Carousel({
 }: CarouselPropsType) {
 	
 	const prevRef = useRef(null);
-	const nextRef = useRef(null);
-	
-	console.log(prevRef);
-	
+	const nextRef = useRef(null);	
 
 	return (
 		<div className={`carouselWrapper relative ${className} ${paginationVariant === "circle" ? "dotsCircle" : ""}`} >
