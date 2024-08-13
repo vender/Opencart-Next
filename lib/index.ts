@@ -959,7 +959,6 @@ export async function getAddresses() {
         postcode_required
         status
       }
-      custom_field
     }
   }
   `);

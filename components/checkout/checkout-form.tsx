@@ -75,15 +75,18 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 	}
 	
 	const setShippingMethod:any = async (code:string) => {
-		const response = await fetch(`/api/checkout/set-shipping-method`, {
-			method: 'POST',
-			body: JSON.stringify({
-				code,
-			})
-		});
-
-		const data:{status: number} = await response.json();
-		return data;
+		if(code) {
+			const response = await fetch(`/api/checkout/set-shipping-method`, {
+				method: 'POST',
+				body: JSON.stringify({
+					code,
+				})
+			});
+			const data:{status: number} = await response.json();
+			return data;
+		} else {
+			return [];
+		}
 	}
 
 	const confirmOrder = async () => {
@@ -99,7 +102,7 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 		setIsLoading(true);
 		
 		const setPayShip = await Promise.all([setPaymentMethod(input.payment_method, input.note), setShippingMethod(input.shipping_method)]) as any;
-		
+		console.log(setPayShip);
 		if(!setPayShip?.reason) {
 			const confirm:any = await confirmOrder();
 			console.log(confirm);
@@ -202,26 +205,28 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 					/>
 					{errors.address && <p className="my-2 text-xs text-red-500">{errors.address?.message}</p>}
 
-					<h3 className="text-lg md:text-xl xl:text-xl font-bold text-heading mb-6 xl:mb-8">
+					{shipingMethods?.length ? <h3 className="text-lg md:text-xl xl:text-xl font-bold text-heading mb-6 xl:mb-8">
 						Способ доставки
-					</h3>
+					</h3> : null}
 
-					{shipingMethods && shipingMethods.map((Method:any, idx:number) =>
-						Method?.quote && Method?.quote.map((shipping:any) =>
-								<RadioBox 
-									key={shipping?.code}
-									labelKey={`${shipping.title} - ${shipping.text}`}
-									{...register("shipping_method", {
-										required: "Выберите способ доставки",
-									})}
-									value={shipping?.code}
-									data-shipcode={shipping?.code}
-									description={shipping.description}
-									onClick={(e) => showPay(shipping?.code)}
-									wrapperCalssName=""
-								/>
-						)
-					)}
+					{shipingMethods?.length ?
+						shipingMethods.map((Method:any, idx:number) =>
+							Method?.quote && Method?.quote.map((shipping:any) =>
+									<RadioBox 
+										key={shipping?.code}
+										labelKey={`${shipping.title} - ${shipping.text}`}
+										{...register("shipping_method", {
+											required: "Выберите способ доставки",
+										})}
+										value={shipping?.code}
+										data-shipcode={shipping?.code}
+										description={shipping.description}
+										onClick={(e) => showPay(shipping?.code)}
+										wrapperCalssName=""
+									/>
+							)
+						) : null
+					}
 					{errors.shipping_method && <p className="my-2 text-xs text-red-500">{errors.shipping_method?.message}</p>}
 
 
