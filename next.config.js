@@ -11,6 +11,9 @@ const nextConfig = {
                 hostname: process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL.split('//')[1],
                 pathname: '/system/storage/upload/**',
             },
+            {
+                hostname: 'downloader.disk.yandex.ru'
+            }
         ],
     },
 }

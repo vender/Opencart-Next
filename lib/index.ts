@@ -652,6 +652,7 @@ export async function getProduct(id: number) {
         images {
           product_image_id
           image
+          thumb
           sort_order
         }
         layout_id

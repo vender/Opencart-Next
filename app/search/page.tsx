@@ -22,10 +22,7 @@ export default async function page({
             <div className={`flex pt-4 md:pt-8 pb-16 lg:pb-20`}>
             <div className="w-full">
                 <h1 className="text-2xl font-bold text-heading hidden lg:inline-flex pb-1 mb-5">Результаты поиска</h1>
-                <ProductGrid
-                products={products}
-                className=""
-                />
+                <ProductGrid products={products} className="" />
             </div>
             </div>
         </Container>
