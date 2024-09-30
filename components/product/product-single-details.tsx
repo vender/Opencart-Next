@@ -61,6 +61,7 @@ export default async function ProductSingleDetails({ product }: Product) {
 						}
 						width={400}
 						height={400}
+						priority={true}
 						alt={product.name}
 						className="object-cover w-full"
 					/>

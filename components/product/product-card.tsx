@@ -67,8 +67,8 @@ export default async function ProductCard({
 							src={product?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${product?.image}` : placeholderImage}
 							width={imgWidth}
 							height={imgHeight}
+							priority={true}
 							// fill={true}
-							loading={imgLoading}
 							alt={product?.name || "Product Image"}
 							className={clsx("object-contain rounded-s-md", {
 								"w-full h-full object-center rounded-md transition duration-200 ease-in group-hover:rounded-b-none":

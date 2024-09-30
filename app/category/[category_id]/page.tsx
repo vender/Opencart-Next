@@ -51,36 +51,36 @@ export default async function Category({ params, searchParams }: any) {
       });
   });
 
-  products &&
-    products.map((item: any) => {
-      item.attributes?.map((i: any) => {
-        if(i.status == 1) {
-          i.attribute.map((i: any) => {
-            // if (!removeAttrib.find((ra) => i.attribute_id == ra)) {
-              attribute_groups.push([i.attribute_id, i.name]);
-            // }
-          });
-        }
-      });
-    });
+  // products &&
+  //   products.map((item: any) => {
+  //     item.attributes?.map((i: any) => {
+  //       if(i.status == 1) {
+  //         i.attribute.map((i: any) => {
+  //           // if (!removeAttrib.find((ra) => i.attribute_id == ra)) {
+  //             attribute_groups.push([i.attribute_id, i.name]);
+  //           // }
+  //         });
+  //       }
+  //     });
+  //   });
 
-  products.map((prod: any) => {
-    prod.attributes?.map((group: any) => {
-      group.attribute.map((attr: any) => {
-        // if (!removeAttrib.includes(Number(attr.attribute_id))) {
-          if (attr.text && attr.status != 0) {
-            attribs.push(attr);
+  // products.map((prod: any) => {
+  //   prod.attributes?.map((group: any) => {
+  //     group.attribute.map((attr: any) => {
+  //       // if (!removeAttrib.includes(Number(attr.attribute_id))) {
+  //         if (attr.text && attr.status != 0) {
+  //           attribs.push(attr);
             
-            allParams.map((param: any) => {
-              if (attr.text == param[0]) {
-                filterdProd.push(prod.product_id);
-              }
-            });
-          }
-        // }
-      });
-    });
-  });
+  //           allParams.map((param: any) => {
+  //             if (attr.text == param[0]) {
+  //               filterdProd.push(prod.product_id);
+  //             }
+  //           });
+  //         }
+  //       // }
+  //     });
+  //   });
+  // });
 
   return (
       <Container>

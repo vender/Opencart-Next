@@ -52,6 +52,7 @@ export default function BannerCard({
 						height={banner.height}
 						alt={banner.title}
 						quality={100}
+						priority={true}
 						className="bg-gray-300 w-full rounded"
 					/>
 					{effectActive && (

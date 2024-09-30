@@ -27,8 +27,6 @@ export default function ProductGallery({ product }: any) {
         // arrows={true}
       >
         {images?.map((item: any, index: number) => {
-          // const prodImage = decodeURIComponent(item?.image);
-          // console.log(prodImage);
           return (
           <SwiperSlide key={`product-gallery-key-${index}`}>
             <div className="col-span-1 transition duration-150 ease-in hover:opacity-90">
@@ -40,6 +38,7 @@ export default function ProductGallery({ product }: any) {
                 }
                 width={400}
                 height={400}
+                priority={true}
                 alt={`${name}--${index}`}
                 className="object-cover w-full"
               />

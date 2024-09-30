@@ -2,7 +2,6 @@
 import BannerCard from "#/components/layout/banner-card";
 import { SwiperSlide } from 'swiper/react';
 import Carousel from "#/components/ui/carousel";
-import { useEffect, useState } from "react";
 
 const breakpoints = {
 	"1025": {
@@ -24,14 +23,8 @@ export default function BannerCarouselBlock({
 	banners
 }:any) {
 	
-	const isClient = typeof window === 'object';
-	const getWindowSize = () => isClient ? window?.innerWidth : 0;
-	// console.log(getWindowSize());
-	
-	// useEffect(() => {
-
-	// 	setWindowSize(getSize());
-	// }, [windowSize]);
+	// const isClient = typeof window === 'object';
+	// const getWindowSize = () => isClient ? window?.innerWidth : 0;
 
 	return (
 		<div className={className}>
