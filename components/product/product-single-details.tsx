@@ -1,7 +1,7 @@
 import Counter from "#/components/product/counter";
-import { loggedIn, reviews } from '#/lib'
+import { loggedIn, getProductColors } from '#/lib'
 import ProductMetaReview from "#/components/product/product-meta-review";
-import Link from "next/link";
+import ProductColors from "./product-colors";
 import ProductGallery from "./productGallery";
 import Image from "next/image";
 import Preorder from "./preorder";
@@ -9,6 +9,7 @@ import Preorder from "./preorder";
 interface Product {
 	product: {
 		product_id: number;
+		sku: string;
 		name: string;
 		image?: string;
 		description: string;
@@ -26,7 +27,7 @@ interface Product {
 
 export default async function ProductSingleDetails({ product }: Product) {
 	const isLogedIn = await loggedIn();
-	const prodReviews = await reviews(product.product_id);
+	const Colors = await getProductColors(product.sku);	
 	
 	const productData = [
 		{
@@ -34,16 +35,16 @@ export default async function ProductSingleDetails({ product }: Product) {
 			type: 'description',
 			content: product.description
 		},
-		{
-			title: 'Характеристики',
-			type: 'attrib',
-			content: product.attributes
-		},
-		{
-			title: 'Отзывы',
-			type: 'review',
-			product_id: product.product_id
-		}
+		// {
+		// 	title: 'Характеристики',
+		// 	type: 'attrib',
+		// 	content: product.attributes
+		// },
+		// {
+		// 	title: 'Отзывы',
+		// 	type: 'review',
+		// 	product_id: product.product_id
+		// }
 	]
 
 	return (
@@ -69,12 +70,12 @@ export default async function ProductSingleDetails({ product }: Product) {
 			}
 
 			<div className="col-span-4 pt-8 lg:pt-0">
-				<div className="pb-3 border-b border-gray-300">
+				<div className="pb-7 mb-7 border-b border-gray-300">
 					<h2 className="text-heading text-lg md:text-xl lg:text-2xl 2xl:text-3xl font-bold hover:text-black mb-3.5">
 						{product?.name}
 					</h2>
 
-					<div className="py-6">
+					{/* <div className="py-6">
 						<ul className="text-sm space-y-5 pb-1">
 							<li>
 								<span className="font-semibold text-heading inline-block pe-2">
@@ -111,7 +112,7 @@ export default async function ProductSingleDetails({ product }: Product) {
 								</li>
 							)}
 						</ul>
-					</div>
+					</div> */}
 
 					<div className="flex items-center mt-5">
 						<div className="text-heading font-bold text-base md:text-xl lg:text-2xl 2xl:text-4xl pe-2 md:pe-0 lg:pe-2 2xl:pe-0">
@@ -125,6 +126,10 @@ export default async function ProductSingleDetails({ product }: Product) {
 					</div>
 				</div>
 
+				<div className="pb-3 border-b border-gray-300">
+					<ProductColors active={product.product_id} colors={Colors} />
+				</div>
+
 				<div className="flex items-center gap-x-4 ltr:md:pr-32 rtl:md:pl-32 ltr:lg:pr-12 rtl:lg:pl-12 ltr:2xl:pr-32 rtl:2xl:pl-32 ltr:3xl:pr-48 rtl:3xl:pl-48 py-8">
 					{ product?.quantity > 0 ?
 						<Counter
@@ -134,7 +139,7 @@ export default async function ProductSingleDetails({ product }: Product) {
 					}
 				</div>
 
-				<ProductMetaReview data={productData} isLogedIn={isLogedIn} prodReviews={prodReviews} />
+				<ProductMetaReview data={productData} isLogedIn={isLogedIn} prodReviews={false} />
 			</div>
 		</div>
 	)

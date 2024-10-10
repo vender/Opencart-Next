@@ -292,7 +292,7 @@ export async function getCategory(id: number = 0) {
 export async function getProducts(parent: number) {
   const data = await fetchAPI(`
   {
-    products(filter_category_id: ${parent} start: 0 limit: 300) {
+    products(filter_category_id: ${parent} filter_main_color: 1 start: 0 limit: 300) {
       attributes {
         attribute_group_id
         name
@@ -592,6 +592,7 @@ export async function getProduct(id: number) {
         quantity
         stock_status
         image
+        color_image
         in_stock
         price
         special
@@ -660,6 +661,30 @@ export async function getProduct(id: number) {
     }
   `, 'no-store',);
   return data?.product
+}
+
+export async function getProductColors(sku: string) {
+  const data = await fetchAPI(`
+    {
+      productColors(
+        sku: "${sku}"
+      ) {
+        product_id
+        name
+        model
+        sku
+        color_image
+        price
+        special
+        formatted_price
+        formatted_special
+        minimum
+        sort_order
+        status
+      }
+    }
+  `, 'no-store',);
+  return data?.productColors
 }
 
 export async function relatedProducts(id: number) {
