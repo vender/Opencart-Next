@@ -25,9 +25,8 @@ export default function ProductColors({
 			</h3>
 			<ul className="colors flex flex-wrap -me-3">
 				{colors?.map(({ product_id, name, color_image }) => (
-                    <Link href={`/product/${product_id}`} >
+                    <Link key={product_id} href={`/product/${product_id}`} >
                         <li
-                            key={product_id}
                             className={clsx(
                                 "cursor-pointer rounded border  w-9 md:w-11 h-9 md:h-11 p-1 mb-2 md:mb-3 me-2 md:me-3 flex justify-center items-center text-heading text-xs md:text-sm uppercase font-semibold transition duration-200 ease-in-out hover:border-black",
                                 { "border-black": active == product_id},
