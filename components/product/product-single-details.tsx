@@ -161,7 +161,6 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 					<ProductOptionsWrapper options={Options} register={register} errors={errors} optionSumm={optionSumm} setOptionSumm={setOptionSumm} />
 
 					<div className="pb-3 border-b border-gray-300">
-						{product.sku}
 						<ProductColors active={product.product_id} colors={colors} />
 					</div>
 

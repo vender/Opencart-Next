@@ -103,6 +103,15 @@ export async function getCart() {
         total
         reward
         points
+        option {
+          product_option_id
+          option_id
+          name
+          type
+          value
+          required
+          in_stock
+        } 
       }
     }
   }
@@ -1083,6 +1092,53 @@ export async function reviews(product_id:number) {
   }
   `);
   return data?.reviews
+}
+
+export async function addOrder(firstName:string, phone:string, note:string) {
+  const data = await fetchAPI(`
+    mutation {
+      addOrder(
+        input: {
+          firstname: "${firstName}"
+          lastname: ""
+          email: ""
+          telephone: "${phone}"
+          comment: "${note}"
+          fax: ""
+          payment_firstname: "${firstName}"
+          payment_lastname: ""
+          payment_company: ""
+          payment_address_1: ""
+          payment_address_2: ""
+          payment_city: ""
+          payment_postcode: ""
+          payment_country: ""
+          payment_zone: ""
+          payment_address_format: ""
+          payment_method: ""
+          payment_code: ""
+          shipping_firstname: "${firstName}"
+          shipping_lastname: ""
+          shipping_company: ""
+          shipping_address_1: ""
+          shipping_address_2: ""
+          shipping_city: ""
+          shipping_postcode: ""
+          shipping_country: ""
+          shipping_zone: ""
+          shipping_address_format: ""
+          shipping_method: ""
+          shipping_code: ""
+          payment_country_id: ""
+          payment_zone_id: ""
+          shipping_country_id: ""
+          shipping_zone_id: ""
+        }
+      )
+    }
+  `, 'no-store',);
+  
+  return data?.addOrder
 }
 
 export async function confirmOrder() {

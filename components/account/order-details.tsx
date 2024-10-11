@@ -1,7 +1,5 @@
 "use client"
 import { OrderItem } from "#/lib/types";
-import { FaPlus } from "react-icons/fa";
-import Link from "next/link";
 
 const OrderItemCard = ({ product }: { product: OrderItem }) => {
 	return (
@@ -14,12 +12,6 @@ const OrderItemCard = ({ product }: { product: OrderItem }) => {
 			</td>
 			<td className="p-4">
 				{product.total} ₽
-				<Link
-					href={`/product/${product.product_id}?open=review`}
-					className="text-sm leading-4 bg-heading text-white px-3 py-2.5 inline-flex gap-1 rounded-md hover:bg-gray-600 ml-3"
-				>
-					<FaPlus /> Отзыв
-				</Link>
 			</td>
 		</tr>
 	);

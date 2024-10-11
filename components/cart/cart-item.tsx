@@ -68,6 +68,11 @@ export default function CartItem({ item }: { item: any }) {
 					{"за шт."} : &nbsp;
 					{item?.price}
 				</span>
+				<ul>
+					{item?.option.map((opt:any) => (
+						<li className="text-sm text-gray-600 mb-2.5">{opt.name}: {opt.value}</li>
+					))}
+				</ul>
 
 				<div className="flex items-end justify-between">
 					<Counter

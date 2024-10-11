@@ -1,11 +1,11 @@
 import Container from "#/components/ui/container";
 import { cookies } from "next/headers";
 import { getCart, getAddresses, loggedIn, getShippingMethods, getPaymentMethods } from "#/lib";
-import CheckoutForm from "#/components/checkout/checkout-form";
+// import CheckoutForm from "#/components/checkout/checkout-form";
 import CheckoutFormSimple from "#/components/checkout/checkout-form-simple";
 import CheckoutCard from "#/components/checkout/checkout-card";
 import Empty from "#/components/checkout/empty";
-import SignUpForm from "#/components/auth/sign-up-form";
+// import SignUpForm from "#/components/auth/sign-up-form";
 
 export default async function CheckoutPage() {
   let sessionId = cookies().get("x-session-id")?.value;
