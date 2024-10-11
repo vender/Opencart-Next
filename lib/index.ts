@@ -110,11 +110,11 @@ export async function getCart() {
   return data?.cart
 }
 
-export async function addItemToCart(product_id: number, quantity: number) {
+export async function addItemToCart(product_id: number, quantity: number, options: any) {
   let qty = quantity ? quantity : 1;
   const data = await fetchAPI(`
     mutation {
-      addItemToCart(input: {product_id: ${product_id}, quantity: ${qty}}) {
+      addItemToCart(input: {product_id: ${product_id}, quantity: ${qty}, options: [${options}]}) {
         weight
         tax
         total
@@ -685,6 +685,36 @@ export async function getProductColors(sku: string) {
     }
   `, 'no-store',);
   return data?.productColors
+}
+
+export async function availableOptions(id: number) {
+  const data = await fetchAPI(`
+  {
+    availableOptions(product_id: ${id}) {
+      product_option_id
+      product_option_value {
+        product_option_value_id
+        option_value_id
+        name
+        image
+        quantity
+        subtract
+        price
+        price_prefix
+        weight
+        weight_prefix
+        in_stock
+      }
+      option_id
+      name
+      type
+      value
+      required
+      in_stock
+    }
+  }
+  `, 'no-store',);
+  return data?.availableOptions
 }
 
 export async function relatedProducts(id: number) {

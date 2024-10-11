@@ -1,4 +1,4 @@
-import { getProduct, relatedProducts } from '#/lib';
+import { getProduct, relatedProducts, loggedIn, reviews, availableOptions, getProductColors } from '#/lib';
 import { notFound } from 'next/navigation';
 import Container from "#/components/ui/container";
 import ProductSingleDetails from "#/components/product/product-single-details";
@@ -22,6 +22,10 @@ export async function generateMetadata(
 export default async function ProductPage({ params }: { params: { product_id: number } }) {
     const product = await getProduct(params.product_id);
     const related = await relatedProducts(params.product_id);
+    const isLogedIn = await loggedIn();
+	const prodReviews = await reviews(product.product_id);
+    const Colors = await getProductColors(product.sku);
+	const Options = await availableOptions(product.product_id);
     
     if(!product.product_id) {
         notFound();
@@ -33,7 +37,7 @@ export default async function ProductPage({ params }: { params: { product_id: nu
                     <div className="pt-8">
                         <Breadcrumb parent={product.categories[0]} title={false}/>
                     </div>
-                    <ProductSingleDetails product={product} />
+                    <ProductSingleDetails product={product} isLogedIn={isLogedIn} prodReviews={prodReviews} Options={Options} colors={Colors} />
                     <RelatedProducts sectionHeading="Рекомендуемые товары" related={related} />
                 </Container>
             </>

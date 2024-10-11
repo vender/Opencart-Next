@@ -6,7 +6,8 @@ function formatErrorMessage(err: Error): string {
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
-  const {product_id, quantity, type, cart_id} = await req.json();
+  const {product_id, quantity, type, cart_id, options} = await req.json();
+  
   // if (!cartId?.length) {
   //   return NextResponse.json({ error: 'Missing cartId or variantId' }, { status: 400 });
   // }
@@ -14,7 +15,7 @@ export async function POST(req: NextRequest): Promise<Response> {
     if(type) {
       await updateCartItem(cart_id, quantity);
     } else {
-      await addItemToCart(product_id, quantity);
+      await addItemToCart(product_id, quantity, options);
     }
     return NextResponse.json({ status: 204 });
   } catch (e) {
