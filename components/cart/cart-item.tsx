@@ -70,7 +70,7 @@ export default function CartItem({ item }: { item: any }) {
 				</span>
 				<ul>
 					{item?.option.map((opt:any) => (
-						<li className="text-sm text-gray-600 mb-2.5">{opt.name}: {opt.value}</li>
+						<li key={opt.product_option_id} className="text-sm text-gray-600 mb-2.5">{opt.name}: {opt.value}</li>
 					))}
 				</ul>
 
