@@ -5,7 +5,8 @@ const { NEXT_PUBLIC_OPENCART_DOMAIN_URL, NEXT_PUBLIC_OPENCART_API_TOKEN } = proc
 async function fetchAPI(query = '', cache: RequestCache = 'default', variables:any = {}, file:any = false) {
   let sesHeaders, body;
 
-  const xsessionid:any = cookies().get("x-session-id")?.value;
+  const cookieStore = await cookies();
+  const xsessionid:any = cookieStore.get("x-session-id")?.value;
   sesHeaders = new Headers([['x-session-id', xsessionid]]) as any;
 
   if (file) {

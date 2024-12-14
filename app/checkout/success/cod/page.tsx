@@ -4,10 +4,10 @@ import { redirect } from 'next/navigation'
 import { PaymentCod, getOrders, orderSuccess } from "#/lib";
 
 export default async function page() {
-    const rbs = await PaymentCod();
+    const cod = await PaymentCod();
     let lastOrder:any;
     
-    if(rbs) {
+    if(cod) {
         await orderSuccess();
         lastOrder = await getOrders(0, 1);
     } else {

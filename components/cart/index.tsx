@@ -5,7 +5,9 @@ import { cookies } from 'next/headers';
 export default async function Cart() {
     let sessionIdUpdated = false;
     let cart;
-    let sessionId = cookies().get('x-session-id')?.value;
+    const cookieStore = await cookies();
+    let sessionId = cookieStore.get("x-session-id")?.value;
+    // let sessionId = cookies().get('x-session-id')?.value;
 
     if (!sessionId) {
         sessionId = await createSession();
