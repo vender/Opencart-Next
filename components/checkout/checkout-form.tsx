@@ -5,34 +5,57 @@ import TextArea from "#/components/ui/text-area";
 import Button from "#/components/ui/button";
 // import { AddressSuggestions } from 'react-dadata';
 import 'react-dadata/dist/react-dadata.css';
-import { useState } from "react";
+import { useId, useState } from "react";
 import { RadioBox } from "../ui/radiobox";
 import { useRouter } from "next/navigation";
 
 interface CheckoutInputType {
 	firstName: string;
-	lastName: string;
 	phone: string;
-	email: string;
-	address: string;
-	save: boolean;
 	note: string;
 	payment_method: string;
 	shipping_method: string;
 }
 
 export default function CheckoutForm({ address, userInfo, paymentMethods, shipingMethods }: any) {	
+	// const id = useId();
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [payShow, setPayShow] = useState(false);
-	// const [value, setValue] = useState(address && address[0]?.address_1 ? address[0]?.address_1 : '') as any;
+	const [value, setValue] = useState(address && address[0]?.address_1 ? address[0]?.address_1 : '') as any;
 
 	const {
 		register,
 		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<CheckoutInputType>();
+	} = useForm<CheckoutInputType>({
+		// defaultValues: {
+		//   address: value
+		// },
+	});
+	
+	// const editAddress = async (params:any) => {
+	// 	if(params?.value && params.data) {
+	// 		userInfo.address_1 = params?.value;
+	// 		setValue(params.value);
+	// 		const response = await fetch(`/api/user/editAddress`, {
+	// 			method: 'POST',
+	// 			body: JSON.stringify({
+	// 				firstname: userInfo.firstname,
+	// 				lastname: userInfo.lastname,
+	// 				address_1: params?.value,
+	// 				city: params.data.city,
+	// 				address_id: userInfo.address_id
+	// 			})
+	// 		});
+	// 		const data = await response.json();
+			
+	// 		if(data.result) {
+	// 			router.refresh();
+	// 		}
+	// 	}
+	// }
 	
 	const setPaymentMethod:any = async (code:string, comment:string) => {		
 		const response = await fetch(`/api/checkout/set-payment-method`, {
@@ -48,10 +71,26 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 	}
 	
 	const setShippingMethod:any = async (code:string) => {
-		const response = await fetch(`/api/checkout/set-shipping-method`, {
+		if(code) {
+			const response = await fetch(`/api/checkout/set-shipping-method`, {
+				method: 'POST',
+				body: JSON.stringify({
+					code,
+				})
+			});
+			const data:{status: number} = await response.json();
+			return data;
+		} else {
+			return [];
+		}
+	}
+
+	const confirmOrder = async (firstName:string, phone:string) => {
+		const response = await fetch(`/api/checkout/confirm`, {
 			method: 'POST',
 			body: JSON.stringify({
-				code,
+				firstName,
+				phone,
 			})
 		});
 
@@ -59,29 +98,21 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 		return data;
 	}
 
-	const confirmOrder = async () => {
-		const response = await fetch(`/api/checkout/confirm`, {
-			method: 'POST'
-		});
-
-		const data:{status: number} = await response.json();
-		return data;
-	}
-
 	async function onSubmit(input: CheckoutInputType) {
-		setIsLoading(true);
+		// setIsLoading(true);
 		
 		const setPayShip = await Promise.all([setPaymentMethod(input.payment_method, input.note), setShippingMethod(input.shipping_method)]) as any;
 		
 		if(!setPayShip?.reason) {
-			const confirm:any = await confirmOrder();
+			const confirm:any = await confirmOrder(input?.firstName, input?.phone);
 			console.log(confirm);
 			
-			if(confirm?.result?.payment) {
-				router.push(confirm?.result?.payment);
-			} else {
-				alert('Ошибка оформления заказа. Попробуйте позже.')
-			}
+			// if(confirm?.result?.payment) {
+			// 	console.log(confirm?.result);
+			// 	router.push(confirm?.result?.payment);
+			// } else {
+			// 	alert('Ошибка оформления заказа. Попробуйте позже.')
+			// }
 		}
 	}
 
@@ -104,28 +135,52 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 				noValidate
 			>
 				<div className="flex flex-col space-y-4 lg:space-y-5">
-					
+					<div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0">
+						<Input
+							labelKey="Имя"
+							{...register("firstName", {
+								required: "Введите имя",
+							})}
+							errorKey={errors.firstName?.message}
+							variant="solid"
+							className="w-full lg:w-1/2 "
+							defaultValue={userInfo?.firstname}
+							disabled={isLoading}
+						/>
 
-					<h3 className="text-lg md:text-xl xl:text-xl font-bold text-heading mb-6 xl:mb-8">
-						Способ доставки
-					</h3>
+						<Input
+							type="tel"
+							labelKey="Телефон"
+							{...register("phone", {
+								required: "Введите телефон",
+							})}
+							errorKey={errors.phone?.message}
+							variant="solid"
+							className="w-full lg:w-1/2 lg:ms-3 mt-2 md:mt-0"
+							defaultValue={userInfo?.telephone}
+							disabled={isLoading}
+						/>
+					</div>
 
-					{shipingMethods && shipingMethods.map((Method:any, idx:number) =>
-						Method?.quote && Method?.quote.map((shipping:any) =>
-								<RadioBox 
-									key={shipping?.code}
-									labelKey={`${shipping.title} - ${shipping.text}`}
-									{...register("shipping_method", {
-										required: "Выберите способ доставки",
-									})}
-									value={shipping?.code}
-									data-shipcode={shipping?.code}
-									description={shipping.description}
-									onClick={(e) => showPay(shipping?.code)}
-									wrapperCalssName=""
-								/>
-						)
-					)}
+					{shipingMethods?.length ?
+						shipingMethods.map((Method:any, idx:number) =>
+							Method?.quote && Method?.quote.map((shipping:any) =>
+									<RadioBox 
+										key={shipping?.code}
+										labelKey={`${shipping.title} - ${shipping.text}`}
+										{...register("shipping_method", {
+											required: "Выберите способ доставки",
+										})}
+										value={shipping?.code}
+										data-shipcode={shipping?.code}
+										description={shipping.description}
+										onClick={(e) => showPay(shipping?.code)}
+										wrapperClassName=""
+										checked={idx == 0 ? true : false}
+									/>
+							)
+						) : null
+					}
 					{errors.shipping_method && <p className="my-2 text-xs text-red-500">{errors.shipping_method?.message}</p>}
 
 
@@ -143,8 +198,9 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 							value={payment?.code}
 							data-paycode={payment?.code}
 							description=''
-							// wrapperCalssName=""
-							wrapperCalssName={payment?.code == 'cod' && !payShow ? 'hidden' : ''}
+							checked={idx == 0 ? true : false}
+							// wrapperClassName={payment?.code == 'cod' && !payShow ? 'hidden' : ''}
+							wrapperClassName=''
 						/>
 					})}
 					{errors.payment_method && <p className="my-2 text-xs text-red-500">{errors.payment_method?.message}</p>}

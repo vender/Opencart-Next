@@ -1142,10 +1142,10 @@ export async function addOrder(firstName:string, phone:string, note:string) {
   return data?.addOrder
 }
 
-export async function confirmOrder() {
+export async function confirmOrder(firstName:string, phone:string) {
   const data = await fetchAPI(`
     mutation {
-      confirmOrder {
+      confirmOrder(firstName: "${firstName}", phone: "${phone}") {
         products {
           cart_id
           product_id
@@ -1170,6 +1170,7 @@ export async function confirmOrder() {
           title
           text
         }
+        payment_code
         payment
       }
     }
