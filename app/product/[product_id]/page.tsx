@@ -6,9 +6,9 @@ import RelatedProducts from "#/components/product/related-products";
 import Divider from "#/components/ui/divider";
 import Breadcrumb from "#/components/layout/breadcrumb";
 
-export async function generateMetadata(
-	{ params }: { params: { product_id: number } },) {
-    const product = await getProduct(params.product_id);
+export async function generateMetadata({ params }:any) {
+    const { product_id } = await params
+    const product = await getProduct(product_id);
 
 	return {
 	  title: product.name,
@@ -19,9 +19,10 @@ export async function generateMetadata(
 	}
 }
 
-export default async function ProductPage({ params }: { params: { product_id: number } }) {
-    const product = await getProduct(params.product_id);
-    const related = await relatedProducts(params.product_id);
+export default async function ProductPage({ params }:any) {
+    const { product_id } = await params;
+    const product = await getProduct(product_id);
+    const related = await relatedProducts(product_id);
     const isLogedIn = await loggedIn();
 	const prodReviews = await reviews(product.product_id);
     const Colors = await getProductColors(product.sku);

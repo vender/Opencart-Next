@@ -397,7 +397,7 @@ export async function getOrders(start: number, limit:number) {
   return data?.orders 
 }
 
-export async function getOrder(id:number) {
+export async function getOrder(id:string) {
   const data = await fetchAPI(`
   {
     order(id: "${id}") {
@@ -1197,6 +1197,16 @@ export async function PaymentRbs(order_id:string) {
   `, 'no-store',);
   
   return data.Payment_Rbs
+}
+
+export async function Payment_Robokassa(OutSum:string, InvId:string, SignatureValue:string) {
+  const data = await fetchAPI(`
+    mutation {
+      Payment_Robokassa(OutSum: "${OutSum}", InvId: "${InvId}", SignatureValue: "${SignatureValue}")
+    }
+  `, 'no-store',);
+  
+  return data.Payment_Robokassa
 }
 
 export async function PaymentCod() {

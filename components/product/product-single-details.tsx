@@ -1,6 +1,5 @@
 "use client"
 import Counter from "#/components/product/counter";
-// import { loggedIn, getProductColors } from '#/lib'
 import ProductMetaReview from "#/components/product/product-meta-review";
 import ProductOptionsWrapper from "./product-options-wrapper";
 import { useForm } from "react-hook-form";
@@ -105,16 +104,6 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 			type: 'description',
 			content: product.description
 		},
-		// {
-		// 	title: 'Характеристики',
-		// 	type: 'attrib',
-		// 	content: product.attributes
-		// },
-		// {
-		// 	title: 'Отзывы',
-		// 	type: 'review',
-		// 	product_id: product.product_id
-		// }
 	]
 
 	return (
@@ -175,6 +164,7 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 									className={`w-full md:w-6/12 xl:w-full`}
 									disabled={editing}
 									loading={editing}
+									title="В корзину"
 								>
 									<span className="py-2 3xl:px-8">В корзину</span>
 								</Button>

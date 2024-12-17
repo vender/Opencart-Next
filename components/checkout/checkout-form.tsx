@@ -29,34 +29,8 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 		control,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<CheckoutInputType>({
-		// defaultValues: {
-		//   address: value
-		// },
-	});
-	
-	// const editAddress = async (params:any) => {
-	// 	if(params?.value && params.data) {
-	// 		userInfo.address_1 = params?.value;
-	// 		setValue(params.value);
-	// 		const response = await fetch(`/api/user/editAddress`, {
-	// 			method: 'POST',
-	// 			body: JSON.stringify({
-	// 				firstname: userInfo.firstname,
-	// 				lastname: userInfo.lastname,
-	// 				address_1: params?.value,
-	// 				city: params.data.city,
-	// 				address_id: userInfo.address_id
-	// 			})
-	// 		});
-	// 		const data = await response.json();
-			
-	// 		if(data.result) {
-	// 			router.refresh();
-	// 		}
-	// 	}
-	// }
-	
+	} = useForm<CheckoutInputType>();
+		
 	const setPaymentMethod:any = async (code:string, comment:string) => {		
 		const response = await fetch(`/api/checkout/set-payment-method`, {
 			method: 'POST',
@@ -99,20 +73,21 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 	}
 
 	async function onSubmit(input: CheckoutInputType) {
-		// setIsLoading(true);
+		setIsLoading(true);
 		
 		const setPayShip = await Promise.all([setPaymentMethod(input.payment_method, input.note), setShippingMethod(input.shipping_method)]) as any;
 		
 		if(!setPayShip?.reason) {
 			const confirm:any = await confirmOrder(input?.firstName, input?.phone);
+			
+			const payment_code = confirm?.result?.payment_code;
 			console.log(confirm);
 			
-			// if(confirm?.result?.payment) {
-			// 	console.log(confirm?.result);
-			// 	router.push(confirm?.result?.payment);
-			// } else {
-			// 	alert('Ошибка оформления заказа. Попробуйте позже.')
-			// }
+			if(confirm?.result?.payment) {
+				router.push(confirm?.result?.payment);
+			} else {
+				alert('Ошибка оформления заказа. Попробуйте позже.')
+			}
 		}
 	}
 

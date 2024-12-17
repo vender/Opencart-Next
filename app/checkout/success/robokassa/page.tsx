@@ -1,18 +1,23 @@
 import Container from "#/components/ui/container";
 import OrderInformation from "#/components/checkout/order-information";
+import { use } from 'react'
 import { redirect } from 'next/navigation'
-import { PaymentRbs, getOrder, orderSuccess } from "#/lib";
+import { getOrder } from "#/lib";
 
-export default async function page({searchParams}:any) {
-    // const rbs = await PaymentRbs(searchParams['orderId']);
-    let order:any = 9;
-    
-    // if(searchParams['orderId'] && rbs != 0) {
-    //     await orderSuccess();
-    //     order = await getOrder(rbs);
-    // } else {
-    //     redirect('/');
-    // }
+type Params = Promise<{ slug: string }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined | any}>
+
+export default function page(props: {
+    params: Params
+    searchParams: SearchParams
+}) {
+    const searchParams = use(props.searchParams);
+    let order = use(getOrder(searchParams?.InvId));
+    if(order?.order_id) {
+        console.log(order);
+    } else {
+        redirect('/');
+    }
 
     return (
         <Container>
