@@ -68,6 +68,7 @@ export default function Coupon({className}:any) {
                     loading={isLoading}
                     className="w-full !p-[0.9rem] lg:!p-[0.9rem]"
                     disabled={isLoading}
+                    title="Применить"
                 >
                     Применить
                 </Button>

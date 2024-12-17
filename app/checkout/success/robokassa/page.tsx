@@ -2,7 +2,7 @@ import Container from "#/components/ui/container";
 import OrderInformation from "#/components/checkout/order-information";
 import { use } from 'react'
 import { redirect } from 'next/navigation'
-import { getOrder } from "#/lib";
+import { getOrder, orderSuccess } from "#/lib";
 
 type Params = Promise<{ slug: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined | any}>
@@ -14,7 +14,7 @@ export default function page(props: {
     const searchParams = use(props.searchParams);
     let order = use(getOrder(searchParams?.InvId));
     if(order?.order_id) {
-        console.log(order);
+        use(orderSuccess());
     } else {
         redirect('/');
     }

@@ -21,8 +21,8 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 	// const id = useId();
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
-	const [payShow, setPayShow] = useState(false);
-	const [value, setValue] = useState(address && address[0]?.address_1 ? address[0]?.address_1 : '') as any;
+	// const [payShow, setPayShow] = useState(false);
+	// const [value, setValue] = useState(address && address[0]?.address_1 ? address[0]?.address_1 : '') as any;
 
 	const {
 		register,
@@ -91,13 +91,13 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 		}
 	}
 
-	function showPay (code:any) {
-		if(code == 'pickup.pickup') {
-			setPayShow(true);
-		} else {
-			setPayShow(false);
-		}
-	}
+	// function showPay (code:any) {
+	// 	if(code == 'pickup.pickup') {
+	// 		setPayShow(true);
+	// 	} else {
+	// 		setPayShow(false);
+	// 	}
+	// }
 
 	return (
 		<>
@@ -149,8 +149,8 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 										value={shipping?.code}
 										data-shipcode={shipping?.code}
 										description={shipping.description}
-										onClick={(e) => showPay(shipping?.code)}
-										wrapperClassName=""
+										// onClick={(e) => showPay(shipping?.code)}
+										wrapperClassName="hidden"
 										checked={idx == 0 ? true : false}
 									/>
 							)
@@ -174,7 +174,6 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 							data-paycode={payment?.code}
 							description=''
 							checked={idx == 0 ? true : false}
-							// wrapperClassName={payment?.code == 'cod' && !payShow ? 'hidden' : ''}
 							wrapperClassName=''
 						/>
 					})}
@@ -192,6 +191,7 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 							loading={isLoading}
 							className="w-full sm:w-auto"
 							disabled={isLoading}
+							title="Оформить заказ"
 						>
 							Оформить заказ
 						</Button>
