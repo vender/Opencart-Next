@@ -173,7 +173,7 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 							value={payment?.code}
 							data-paycode={payment?.code}
 							description=''
-							checked={idx == 0 ? true : false}
+							// checked={false}
 							wrapperClassName=''
 						/>
 					})}
