@@ -2,10 +2,22 @@
 import { SwiperSlide } from 'swiper/react';
 import Carousel from "#/components/ui/carousel";
 import Image from 'next/image';
-
 import Link from 'next/link';
 
-export default function Banners({ banners }: { banners: any }) {
+interface Banner {
+  banner_id: string;
+  name: string;
+  status: number;
+  banner_image_id: string;
+  language_id: string;
+  title: string;
+  link: string;
+  image: string;
+  width: number;
+  height: number;
+}
+
+export default function Banners({ banners }: { banners: Banner[] }) {
     
     return (
         <div className='carouselWrapper relative max-w-[1920px] mb-5 md:mb-12 lg:mb-14 2xl:mb-16 mx-auto overflow-hidden px-4 md:px-8 2xl:px-0'>
@@ -27,9 +39,9 @@ export default function Banners({ banners }: { banners: any }) {
                             <Image
                                 src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${banner.image}`}
                                 className="bg-gray-300 w-full rounded"
-                                width={1800}
-                                height={800}
-                                alt=''
+                                width={banner.width}
+                                height={banner.height}
+                                alt={banner.title}
                             />
                         </Link>
                     </SwiperSlide>
