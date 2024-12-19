@@ -117,6 +117,7 @@ export default function Counter({
 				className={`w-full md:w-6/12 xl:w-full ${!isSelected && "bg-gray-400 hover:bg-gray-400"}`}
 				disabled={editing}
 				loading={editing}
+				title="В корзину"
 			>
 				<span className="py-2 3xl:px-8">В корзину</span>
 			</Button>

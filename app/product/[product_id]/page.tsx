@@ -7,8 +7,7 @@ import Divider from "#/components/ui/divider";
 import Breadcrumb from "#/components/layout/breadcrumb";
 import { use } from 'react';
 
-export async function generateMetadata(props:any) {
-    const params = use(props.params) as any;
+export async function generateMetadata({ params, searchParams }: any) {
     const product = await getProduct(params.product_id);
 
 	return {
@@ -20,10 +19,10 @@ export async function generateMetadata(props:any) {
 	}
 }
 
-export default async function ProductPage(props:any) {
+export default function ProductPage(props:any) {
     const params = use(props.params) as any;
-    const product = await getProduct(params.product_id);
-    const related = await relatedProducts(params.product_id);
+    const product = use(getProduct(params.product_id));
+    const related = use(relatedProducts(params.product_id));
     
     if(!product.product_id) {
         notFound();

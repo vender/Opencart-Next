@@ -3,8 +3,8 @@ import { getInformationPage } from "#/lib";
 import Prose from "#/components/prose";
 import { use } from 'react'
 
-export async function generateMetadata(props:any) {
-  const params = use(props.params) as any;
+
+export async function generateMetadata({ params, searchParams }: any) {
   const pageInfo = await getInformationPage(params.id);
 
   return {
@@ -15,9 +15,9 @@ export async function generateMetadata(props:any) {
   };
 }
 
-async function page(props:any) {
+function page(props:any) {
   const params = use(props.params) as any;
-  const pageInfo = await getInformationPage(params.id);
+  const pageInfo = use(getInformationPage(params.id));
   // const description = product?.description.replace(/(<([^>]+)>)|(&lt;...|gt;)|&/gi, "");
   return (
     <Container>

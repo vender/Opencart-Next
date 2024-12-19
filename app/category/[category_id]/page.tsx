@@ -7,8 +7,7 @@ import SearchTopBar from "#/components/ui/top-bar";
 import clsx from "clsx";
 import { use } from 'react'
 
-export async function generateMetadata(props:any) {
-  const params = use(props.params) as any;
+export async function generateMetadata({ params, searchParams }: any) {
   const category = await getCategory(params.category_id);
 
   return {
@@ -31,11 +30,11 @@ const uniqArray = (array: any) => {
     .map(JSON.parse);
 };
 
-export default async function Category(props:any) {
+export default function Category(props:any) {
   const params = use(props.params) as any;
   const searchParams = use(props.searchParams) as any;
-  const products = await getProducts(params.category_id);
-  const category = await getCategory(params.category_id);
+  const products = use(getProducts(params.category_id));
+  const category = use(getCategory(params.category_id));
 
   let attribs: any = [];
   let attribute_groups: any = [];
