@@ -5,12 +5,10 @@ import { getCategory, getProducts } from "#/lib";
 import ShopFilters from "#/components/ui/filters";
 import SearchTopBar from "#/components/ui/top-bar";
 import clsx from "clsx";
+import { use } from 'react'
 
-type Props = {
-  params: { id: string; category_id: number };
-};
-
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props:any) {
+  const params = use(props.params) as any;
   const category = await getCategory(params.category_id);
 
   return {
@@ -33,7 +31,9 @@ const uniqArray = (array: any) => {
     .map(JSON.parse);
 };
 
-export default async function Category({ params, searchParams }: any) {
+export default async function Category(props:any) {
+  const params = use(props.params) as any;
+  const searchParams = use(props.searchParams) as any;
   const products = await getProducts(params.category_id);
   const category = await getCategory(params.category_id);
 

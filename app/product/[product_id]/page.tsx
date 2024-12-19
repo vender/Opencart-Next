@@ -5,9 +5,10 @@ import ProductSingleDetails from "#/components/product/product-single-details";
 import RelatedProducts from "#/components/product/related-products";
 import Divider from "#/components/ui/divider";
 import Breadcrumb from "#/components/layout/breadcrumb";
+import { use } from 'react';
 
-export async function generateMetadata(
-	{ params }: { params: { product_id: number } },) {
+export async function generateMetadata(props:any) {
+    const params = use(props.params) as any;
     const product = await getProduct(params.product_id);
 
 	return {
@@ -19,7 +20,8 @@ export async function generateMetadata(
 	}
 }
 
-export default async function ProductPage({ params }: { params: { product_id: number } }) {
+export default async function ProductPage(props:any) {
+    const params = use(props.params) as any;
     const product = await getProduct(params.product_id);
     const related = await relatedProducts(params.product_id);
     

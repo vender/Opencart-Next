@@ -2,13 +2,11 @@ import Container from "#/components/ui/container";
 import Breadcrumb from "#/components/layout/breadcrumb";
 import ProductGrid from "#/components/product/product-grid";
 import { searchProduct } from '#/lib';
+import { use } from "react";
 
-export default async function page({
-    searchParams
-  }: {
-    searchParams: { [key: string]: string | string[] | undefined }
-  }) {
-    const {search} = searchParams;
+export default async function page(props:any) {
+    const searchParams = use(props.searchParams) as any;
+    const search = searchParams.search;
     let products = []
     if(search?.length && search?.length > 2) {
         products = await searchProduct(search);

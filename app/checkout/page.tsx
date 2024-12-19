@@ -7,7 +7,8 @@ import Empty from "#/components/checkout/empty";
 import SignUpForm from "#/components/auth/sign-up-form";
 
 export default async function CheckoutPage() {
-  let sessionId = cookies().get("x-session-id")?.value;
+  const cookieStore = await cookies();
+  const sessionId = cookieStore.get('x-session-id')?.value;
   let cart: any,
   userAddress: any,
   userInfo: any;

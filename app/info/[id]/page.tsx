@@ -1,12 +1,10 @@
 import Container from "#/components/ui/container";
 import { getInformationPage } from "#/lib";
 import Prose from "#/components/prose";
+import { use } from 'react'
 
-type Props = {
-  params: { id: number;};
-};
-
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props:any) {
+  const params = use(props.params) as any;
   const pageInfo = await getInformationPage(params.id);
 
   return {
@@ -17,7 +15,8 @@ export async function generateMetadata({ params }: Props) {
   };
 }
 
-async function page({ params }: { params: any }) {
+async function page(props:any) {
+  const params = use(props.params) as any;
   const pageInfo = await getInformationPage(params.id);
   // const description = product?.description.replace(/(<([^>]+)>)|(&lt;...|gt;)|&/gi, "");
   return (
