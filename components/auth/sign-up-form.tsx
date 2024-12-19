@@ -2,7 +2,8 @@
 import Input from "#/components/ui/input";
 import PasswordInput from "#/components/ui/password-input";
 import Button from "#/components/ui/button";
-import InputMask from "react-input-mask";
+// import InputMask from "react-input-mask";
+import { useMask } from '@react-input/mask';
 import { Controller, useForm } from "react-hook-form";
 import { AddressSuggestions } from 'react-dadata';
 import { useRouter, redirect } from 'next/navigation';
@@ -57,7 +58,8 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 			})
 		});
 		const data = await response.json();
-				
+		console.log(data);
+		
 		if(data?.result?.register && !jsonCheck(data?.result?.register)) {
 			setCookie('x-session-id', data?.result?.register, {
 				path: '/',
@@ -75,12 +77,19 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 	function onSubmit(input:any) {
 		console.log(input);
 		
-		// if(adres !== undefined) {
-		// 	signUp(input);
-		// } else {
-		// 	alert("Заполните полный адрес")
-		// }
+		if(adres !== undefined) {
+			signUp(input);
+		} else {
+			alert("Заполните полный адрес")
+		}
 	}
+
+	const phoneInputRef = useMask({
+		mask: '+7 (___) ___-__-__',
+		replacement: { _: /\d/ },
+		showMask: true
+	});
+
 	return (
 		<div className={`py-5 px-5 sm:px-8 bg-white mx-auto rounded-lg ${className} border border-gray-300`}>
 			<h2 className="text-center mb-6 pt-2.5 font-bold text-lg">Регистрация пользователя</h2>
@@ -135,18 +144,39 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 						}}
 						errorKey={errors.phone?.message}
 						render={({ field }) => (
-							<InputMask
-								value={field.value}
-								mask="+7 (999) 999-99-99"
-								maskPlaceholder={'_'}
-								alwaysShowMask
+							<Input 
+								name="phone"
+								labelKey="Номер телефона" 
+								type="tel" 
+								variant="solid" 
+								ref={phoneInputRef} 
 								onChange={(e:any) => {
 									e.persist();
 									field.onChange(e.target.value);
 								}}
-							>
-								<Input name="phone" labelKey="Номер телефона" type="tel" variant="solid" />
-							</InputMask>
+							/>
+
+							// <InputMask 
+							// 	mask="+7 (999) 999-99-99" 
+							// 	showMask
+							// 	onChange={(e:any) => {
+							// 		e.persist();
+							// 		field.onChange(e.target.value);
+							// 	}}
+							// />
+
+							// <InputMask
+							// 	value={field.value}
+							// 	mask="+7 (999) 999-99-99"
+							// 	maskPlaceholder={'_'}
+							// 	alwaysShowMask
+							// 	onChange={(e:any) => {
+							// 		e.persist();
+							// 		field.onChange(e.target.value);
+							// 	}}
+							// >
+							// 	<Input name="phone" labelKey="Номер телефона" type="tel" variant="solid" />
+							// </InputMask>
 						)}
 					/>
 					{errors.phone && <p className="my-2 text-xs text-red-500">{errors.phone?.message}</p>}
@@ -194,6 +224,7 @@ export default function SignUpForm({addressShow, className = ''}:{addressShow:bo
 							loading={isLoading}
 							disabled={isLoading}
 							className="h-11 md:h-12 w-full mt-2"
+							title="Зарегистрироваться"
 						>
 							Зарегистрироваться
 						</Button>

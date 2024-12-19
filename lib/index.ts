@@ -1153,7 +1153,7 @@ export async function register(params:any) {
           firstname: "${firstname}"
           lastname: "${lastname}"
           email: "${email}"
-          telephone: ${phone}
+          telephone: "${phone}"
           address_1: "${address}"
           address_2: ""
           country_id: 176

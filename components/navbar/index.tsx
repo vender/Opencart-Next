@@ -17,7 +17,7 @@ export default async function Navbar({mainMenu, isLogedIn, siteInfo}:any) {
       <div className="innerSticky text-gray-700 body-font fixed bg-white w-full h-16 sm:h-20 lg:h-24 z-20 ps-4 md:ps-0 lg:ps-6 pe-4 lg:pe-6 transition duration-200 ease-in-out">
         <div className="flex items-center justify-center mx-auto max-w-[1920px] h-full w-full">
 
-          <Logo className='inline-flex focus:outline-none' siteInfo={siteInfo} width={100} height={50} />
+          <Logo className='inline-flex focus:outline-none' siteInfo={siteInfo} width={110} height={50} />
 
           <HeaderMenu
             menu={mainMenu.menu}
