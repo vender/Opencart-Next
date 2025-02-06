@@ -1,11 +1,7 @@
-"use client"
 import Widgets from "./widgets";
 import Copyright from "./copyright";
-import { footer } from "./data";
-const { payment }:any = footer;
 
 export default function Footer({infoPages, widgets}:any) {
-    // const widgets = groupBy(data, 'footer_id');
 
     let pageList = {
       footer_id: 5,
@@ -21,9 +17,9 @@ export default function Footer({infoPages, widgets}:any) {
     };
 
     return (
-      <footer className="border-b-4 border-heading mt-9 md:mt-11 lg:mt-16 3xl:mt-20 pt-2.5 lg:pt-0 2xl:pt-2">
+      <footer className="bg-[#f6f2ef] border-b-4 border-heading md:mt-11 pt-[50px]">
         <Widgets widgets={[...widgets, pageList]} />
-        <Copyright payment={payment} />
+        <Copyright />
       </footer>
     )
 }

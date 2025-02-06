@@ -22,7 +22,7 @@ export default async function page() {
 								Напишите нам
 							</h4>
 						</div>
-						<ContactForm />
+						<ContactForm productName="" />
 					</div>
 				</div>
 			</Container>

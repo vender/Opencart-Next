@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 /* Write your own custom base styles here */
 @layer base {
 	html {
@@ -24,6 +25,10 @@
 	p > a:hover {
 		@apply text-heading;
 	}
+}
+
+* {
+    scrollbar-width: thin;
 }
 
 @layer components {

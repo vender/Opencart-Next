@@ -23,7 +23,7 @@ export default function WidgetLink({ className, widget }:Props) {
 	
 	return (
 		<div className={`${className}`}>
-			<h4 className="text-heading text-sm md:text-base xl:text-lg font-semibold mb-5 2xl:mb-6 3xl:mb-7">
+			<h4 className="text-[#999] text-[16px] font-light md:text-base xl:text-lg font-semibold mb-5 2xl:mb-6 3xl:mb-7">
 				{`${widget?.name}`}
 			</h4>
 			<ul className="text-xs lg:text-sm text-body flex flex-col space-y-3 lg:space-y-3.5">

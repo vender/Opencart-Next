@@ -8,40 +8,79 @@ module.exports = {
 		'./components/**/*.{js,ts,jsx,tsx,mdx}',
 		'./app/**/*.{js,ts,jsx,tsx,mdx}',
 	],
-	darkMode: 'media',
+	darkMode: ['media', 'class'],
 	theme: {
 		extend: {
 			colors: {
-				body: "#5A5A5A",
-				heading: "#212121",
-				input: "#1D1E1F",
-				black: "#000",
-				white: "#fff",
-				linen: "#FBF1E9",
-				linenSecondary: "#ECE7E3",
-				olive: "#3D9970",
-				maroon: "#B03060",
-				brown: "#C7844B",
-				placeholder: "#707070",
-				borderBottom: "#f7f7f7",
-				facebook: "#4267B2",
-				facebookHover: "#395fad",
-				google: "#4285F4",
-				googleHover: "#307bf9",
-				gray: {
-					50: "#FBFBFB",
-					100: "#F1F1F1",
-					150: "#F4F4F4",
-					200: "#F9F9F9",
-					300: "#E6E6E6",
-					350: "#E9ECEF",
-					400: "#999999",
-					500: "#D8D8D8",
-					600: "#3A3A3A",
-					700: "#292929",
-					800: "#707070",
-				},
-			},
+    			body: '#5A5A5A',
+    			heading: '#212121',
+    			input: 'hsl(var(--input))',
+    			black: '#000',
+    			white: '#fff',
+    			linen: '#FBF1E9',
+    			linenSecondary: '#ECE7E3',
+    			olive: '#3D9970',
+    			maroon: '#B03060',
+    			brown: '#C7844B',
+    			placeholder: '#707070',
+    			borderBottom: '#f7f7f7',
+    			facebook: '#4267B2',
+    			facebookHover: '#395fad',
+    			google: '#4285F4',
+    			googleHover: '#307bf9',
+    			gray: {
+    				'50': '#FBFBFB',
+    				'100': '#F1F1F1',
+    				'150': '#F4F4F4',
+    				'200': '#F9F9F9',
+    				'300': '#E6E6E6',
+    				'350': '#E9ECEF',
+    				'400': '#999999',
+    				'500': '#D8D8D8',
+    				'600': '#3A3A3A',
+    				'700': '#292929',
+    				'800': '#707070'
+    			},
+    			background: 'hsl(var(--background))',
+    			foreground: 'hsl(var(--foreground))',
+    			card: {
+    				DEFAULT: 'hsl(var(--card))',
+    				foreground: 'hsl(var(--card-foreground))'
+    			},
+    			popover: {
+    				DEFAULT: 'hsl(var(--popover))',
+    				foreground: 'hsl(var(--popover-foreground))'
+    			},
+    			primary: {
+    				DEFAULT: 'hsl(var(--primary))',
+    				foreground: 'hsl(var(--primary-foreground))'
+    			},
+    			secondary: {
+    				DEFAULT: 'hsl(var(--secondary))',
+    				foreground: 'hsl(var(--secondary-foreground))'
+    			},
+    			muted: {
+    				DEFAULT: 'hsl(var(--muted))',
+    				foreground: 'hsl(var(--muted-foreground))'
+    			},
+    			accent: {
+    				DEFAULT: 'hsl(var(--accent))',
+    				foreground: 'hsl(var(--accent-foreground))'
+    			},
+    			destructive: {
+    				DEFAULT: 'hsl(var(--destructive))',
+    				foreground: 'hsl(var(--destructive-foreground))'
+    			},
+    			border: 'hsl(var(--border))',
+    			ring: 'hsl(var(--ring))',
+    			chart: {
+    				'1': 'hsl(var(--chart-1))',
+    				'2': 'hsl(var(--chart-2))',
+    				'3': 'hsl(var(--chart-3))',
+    				'4': 'hsl(var(--chart-4))',
+    				'5': 'hsl(var(--chart-5))'
+    			}
+    		},
 			fontSize: {
 				"10px": ".625rem",
 			},
@@ -131,6 +170,7 @@ module.exports = {
 					values: theme('transitionDelay')
 				}
 			);
-		})
+		}),
+		require("tailwindcss-animate")
 	],
 }

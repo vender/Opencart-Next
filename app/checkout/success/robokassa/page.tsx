@@ -7,7 +7,7 @@ import { getOrder, orderSuccess } from "#/lib";
 type Params = Promise<{ slug: string }>
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined | any}>
 
-export default function page(props: {
+export default function Page(props: {
     params: Params
     searchParams: SearchParams
 }) {

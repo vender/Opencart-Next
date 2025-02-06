@@ -6,6 +6,8 @@ import MobileNavigation from "#/components/navbar/mobile-navigation";
 import { Toaster } from 'react-hot-toast';
 import type { Metadata, ResolvingMetadata } from 'next'
 import { getCategories, getInformations, loggedIn, siteInfo, footers } from '#/lib';
+import { Metrika } from "#/components/metrika";
+import { Suspense } from 'react';
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic-ext'],
@@ -84,6 +86,9 @@ export default async function RootLayout({
     <html lang="ru" className={`${inter.variable}`}>
       <head />
       <body>
+        <Suspense>
+          <Metrika />
+        </Suspense>
         <div className='flex flex-col min-h-screen'>
           <Navbar mainMenu={mainMenu} infoPages={infoPages} isLogedIn={isLogedIn} siteInfo={siteInfoData} />
           <main className='relative flex-grow'>{children}</main>

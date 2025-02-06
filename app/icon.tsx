@@ -13,7 +13,7 @@ export default async function Icon() {
     const siteInfoData = await siteInfo();
   return new ImageResponse(
     (
-      <img src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${siteInfoData?.siteIcon}`} />
+      <img src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${siteInfoData?.siteIcon}`} alt='' />
     ),
     {...size}
   )

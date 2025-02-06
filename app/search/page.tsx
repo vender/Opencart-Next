@@ -5,7 +5,7 @@ import { use } from "react";
 import { searchProduct } from '#/lib';
 
 
-export default function page(props:any) {
+export default function Page(props:any) {
     const searchParams = use(props.searchParams) as any;
     const search = searchParams.search;
     

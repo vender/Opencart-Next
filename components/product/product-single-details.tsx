@@ -11,6 +11,7 @@ import ProductColors from "./product-colors";
 import ProductGallery from "./productGallery";
 import Image from "next/image";
 import Preorder from "./preorder";
+import { AskQuestion } from '#/components/product/ask-question';
 
 interface Props {
 	product: {
@@ -58,7 +59,7 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 
 	useEffect(() => {
 		setValue("quantity", count);
-	}, [count]);
+	}, [count, setValue]);
 
 	const router = useRouter();
 
@@ -176,6 +177,7 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 					</div>
 				</form>
 				<ProductMetaReview data={productData} isLogedIn={isLogedIn} prodReviews={false} />
+				<AskQuestion productName={product?.name} />
 			</div>
 		</div>
 	)

@@ -1,10 +1,10 @@
 export const siteSettings = {
-	name: "ilMonte",
+	name: "Rusmodern",
 	description:
-		"NextJS, TypeScript, React-Query and Tailwind CSS.",
+		"компания, которая старается сделать мир более элегантным и торжественным",
 	author: {
 		name: "vender",
-		websiteUrl: "/#",
+		websiteUrl: "https://t.me/vender_ru",
 		address: "",
 	}
 };

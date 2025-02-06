@@ -12,29 +12,17 @@ interface ContactFormValues {
 	message: string;
 }
 
-export default function ContactForm() {
+export default function ContactForm({productName}:{productName: string}) {
 	const [state, formAction] = useActionState(sendQuestion, null);
-
-	if(state?.error) {
-		// alert(state.error);
-	}
-	// console.log(state);
 
 	const {
 		register,
-		// handleSubmit,
 		formState: { errors },
 	} = useForm<ContactFormValues>();
-	
-	// async function onSubmit(values: ContactFormValues) {
-	// 	const server = await sendQuestion(values);
-	// 	console.log(server);
-	// }
 
   	return (
 		<form
 			action={formAction}
-			// onSubmit={handleSubmit(onSubmit)}
 			className="w-full mx-auto flex flex-col justify-center "
 			noValidate
 		>
@@ -51,7 +39,7 @@ export default function ContactForm() {
 						required
 					/>
 					<Input
-						labelKey="Введите Email или номер телефона"
+						labelKey="Email или номер телефона"
 						type="email"
 						{...register("email", {
 							required: "заполните поле",
@@ -65,6 +53,7 @@ export default function ContactForm() {
 						variant="solid"
 						required
 					/>
+					{productName && <Input type="hidden" name="productName" value={productName} />}
 				</div>
 				<TextArea
 					labelKey="Сообщение"

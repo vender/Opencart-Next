@@ -6,6 +6,7 @@ import RelatedProducts from "#/components/product/related-products";
 import Divider from "#/components/ui/divider";
 import Breadcrumb from "#/components/layout/breadcrumb";
 
+
 export async function generateMetadata({ params }:any) {
     const { product_id } = await params
     const product = await getProduct(product_id);

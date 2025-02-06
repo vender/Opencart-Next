@@ -29,7 +29,7 @@ export default function ProductGallery({ product }: any) {
         {images?.map((item: any, index: number) => {
           return (
           <SwiperSlide key={`product-gallery-key-${index}`}>
-            <div className="col-span-1 transition duration-150 ease-in hover:opacity-90">
+            <div className="col-span-1 transition duration-150 ease-in">
               <Image
                 src={
                   item?.image
