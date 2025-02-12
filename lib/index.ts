@@ -79,6 +79,7 @@ export async function getCart() {
       weight
       tax
       total
+      count
       subtotal
       coupon_discount
       coupon_code

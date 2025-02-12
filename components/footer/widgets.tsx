@@ -17,7 +17,7 @@ export default function Widgets({ widgets, data }:any) {
 				<div className="text-xl">
 					<div className="mb-1">
 						<a href="tel:+79183330100">+7 918 333 01 00</a> <sup>для партнеров</sup><br/>
-						<a href="tel:+79262882925">+7 926 288 29 25</a> <sup>розница</sup>
+						<a href="tel:+79262882925">+7 988 888 10 48</a> <sup>розница</sup>
 					</div>
 					<div className="text-base">
 						<a href="mailto:89183330100@mail.ru">89183330100@mail.ru</a>

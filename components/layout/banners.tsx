@@ -2,10 +2,24 @@
 import { SwiperSlide } from 'swiper/react';
 import Carousel from "#/components/ui/carousel";
 import Image from 'next/image';
-
 import Link from 'next/link';
 
-export default function Banners({ banners }: { banners: any }) {
+interface Banners {
+    banners: {
+        banner_id: string;
+        name: string;
+        status: number;
+        banner_image_id: string;
+        language_id: string;
+        title: string;
+        link: string;
+        image: string;
+        width: number;
+        height: number;
+    }[]
+}
+
+export default function Banners({ banners }: Banners) {
     
     return (
         <div className='carouselWrapper relative max-w-[1920px] mb-5 md:mb-12 lg:mb-14 2xl:mb-16 mx-auto overflow-hidden px-4 md:px-8 2xl:px-0'>
