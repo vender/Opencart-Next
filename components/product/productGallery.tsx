@@ -22,9 +22,8 @@ export default function ProductGallery({ product }: any) {
         }}
         breakpoints={productGalleryCarouselResponsive}
         className="product-gallery"
-        buttonClassName="hidden"
         autoHeight={true}
-        // arrows={true}
+        arrows={true}
       >
         {images?.map((item: any, index: number) => {
           // const prodImage = decodeURIComponent(item?.image);
@@ -38,6 +37,9 @@ export default function ProductGallery({ product }: any) {
                     ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${item?.image}`
                     : "/assets/placeholder/products/product-gallery.svg"
                 }
+                onError={(e) => {
+                  e.currentTarget.src = "/assets/placeholder/products/product-gallery.svg";
+                }}
                 width={400}
                 height={400}
                 alt={`${name}--${index}`}

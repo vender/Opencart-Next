@@ -24,10 +24,10 @@ export default function Banners({ banners }: { banners: Banner[] }) {
             <Carousel
 				autoplay={{ delay: 5000 }}
 				className="mx-0"
-				buttonClassName="hidden"
 				pagination={{
 					clickable: true,
 				}}
+                arrows={true}
 			>
                 {banners && banners?.map((banner: any) => (
 
