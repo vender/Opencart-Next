@@ -15,7 +15,7 @@ export async function generateMetadata({ params, searchParams }: any) {
   };
 }
 
-function page(props:any) {
+export default function Page(props:any) {
   const params = use(props.params) as any;
   const pageInfo = use(getInformationPage(params.id));
   // const description = product?.description.replace(/(<([^>]+)>)|(&lt;...|gt;)|&/gi, "");
@@ -33,5 +33,3 @@ function page(props:any) {
     </Container>
   );
 }
-
-export default page;

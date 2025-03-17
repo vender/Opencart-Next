@@ -7,9 +7,9 @@ export default async function page() {
     await orderSuccess();
     const lastOrder = await getOrders(0, 1);
 
-    if(lastOrder?.length == 0){
-        redirect('/');
-    }
+    // if(lastOrder?.length == 0){
+    //     redirect('/');
+    // }
 
     return (
         <>

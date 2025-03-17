@@ -102,8 +102,7 @@ export default function CheckoutForm({ address, userInfo, paymentMethods, shipin
 		
 		if(!setPayShip?.reason) {
 			const confirm:any = await confirmOrder();
-			console.log(confirm);
-			
+			// console.log(confirm);
 			if(confirm?.result?.payment) {
 				router.push(confirm?.result?.payment);
 			} else {

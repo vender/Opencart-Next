@@ -4,7 +4,7 @@ import ProductGrid from "#/components/product/product-grid";
 import { searchProduct } from '#/lib';
 import { use } from "react";
 
-export default function page(props:any) {
+export default function Page(props:any) {
     const searchParams = use(props.searchParams) as any;
 
     let products = []

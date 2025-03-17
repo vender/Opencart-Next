@@ -1087,6 +1087,16 @@ export async function PaymentRbs(order_id:string) {
   return data.Payment_Rbs
 }
 
+export async function PaymentYookassa(order_id:string) {
+  const data = await fetchAPI(`
+    mutation {
+      Payment_Yookassa(input: "${order_id}")
+    }
+  `, 'no-store',);
+  
+  return data.Payment_Yookassa
+}
+
 export async function PaymentCod() {
   const data = await fetchAPI(`
     mutation {
