@@ -11,7 +11,6 @@ const productGalleryCarouselResponsive = {
 };
 
 export default function ProductGallery({ product }: any) {
-  // const { width } = useWindowSize();
   const { images, name } = product;
 
   return (
@@ -22,15 +21,15 @@ export default function ProductGallery({ product }: any) {
         }}
         breakpoints={productGalleryCarouselResponsive}
         className="product-gallery"
-        autoHeight={true}
+        autoHeight={false}
         arrows={true}
+        autoplay={false}
       >
         {images?.map((item: any, index: number) => {
           // const prodImage = decodeURIComponent(item?.image);
           // console.log(prodImage);
           return (
-          <SwiperSlide key={`product-gallery-key-${index}`}>
-            <div className="col-span-1 transition duration-150 ease-in hover:opacity-90">
+          <SwiperSlide key={`product-gallery-key-${index}`} className="col-span-1 !flex justify-center items-center">
               <Image
                 src={
                   item?.image
@@ -43,9 +42,8 @@ export default function ProductGallery({ product }: any) {
                 width={400}
                 height={400}
                 alt={`${name}--${index}`}
-                className="object-cover w-full"
+                className="object-cover w-auto max-h-[600px]"
               />
-            </div>
           </SwiperSlide>
         )})}
       </Carousel>

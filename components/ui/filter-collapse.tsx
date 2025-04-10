@@ -6,7 +6,7 @@ import { usePathname, useSearchParams, useRouter } from 'next/navigation';
 
 export default function FilterCollapse({ attrib_group, items }: any) {
 	items = items.filter((item: any, idx: number) => item.attribute_id == attrib_group[0]);
-	const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({ defaultExpanded: true });
+	const { getCollapseProps, getToggleProps, isExpanded } = useCollapse({ defaultExpanded: false });
 	items.sort((a:any, b:any) => {
 		return a.text - b.text;
 	});
@@ -45,7 +45,7 @@ export default function FilterCollapse({ attrib_group, items }: any) {
 	return (
 		items.length > 0 && items[0].text && <>
 			<h3 className="text-heading text-sm md:text-base font-semibold" {...getToggleProps()}>
-				{isExpanded ? `${attrib_group[1]} +` : `${attrib_group[1]} -`}
+				{isExpanded ? `${attrib_group[1]} -` : `${attrib_group[1]} +`}
 			</h3>
 			<section className="mt-2 flex flex-col space-y-2" {...getCollapseProps()}>
 				{items.map((item: any, idx:number) => (

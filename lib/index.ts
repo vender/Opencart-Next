@@ -258,7 +258,7 @@ export async function getCategories(parent: number = 0) {
   return data?.categories
 }
 
-export async function getCategory(id: number = 0) {
+export async function getCategory(id: number | string = 0) {
   const data = await fetchAPI(`
   {
     category(id: ${id}) {
@@ -284,13 +284,14 @@ export async function getCategory(id: number = 0) {
         column
         status
       }
+      attribs
     }
   }
   `);
   return data?.category
 }
 
-export async function getProducts(parent: number) {
+export async function getProducts(parent: number | string) {
   const data = await fetchAPI(`
   {
     products(filter_category_id: ${parent} start: 0 limit: 300) {
@@ -303,6 +304,7 @@ export async function getProducts(parent: number) {
           name
           text
           status
+          display
         }
       }
       product_id

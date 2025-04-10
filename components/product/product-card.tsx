@@ -95,7 +95,7 @@ export default async function ProductCard({
 					
 						<h2
 							className={clsx("text-heading font-semibold mb-1", {
-								"text-sm md:text-base": variant === "grid",
+								"text-sm md:text-sm": variant === "grid",
 								"md:mb-1.5 text-sm sm:text-base md:text-sm lg:text-base xl:text-lg":
 									variant === "gridSlim",
 								"text-sm sm:text-base md:mb-1.5 pb-0": variant === "listSmall",
@@ -119,7 +119,7 @@ export default async function ProductCard({
 								)}
 							</div>
 						</>
-					) : <Preorder isLogedIn={isLogedIn} product={product} />}
+					) : (<><p className="text-body text-xs lg:text-sm leading-normal xl:leading-relaxed max-w-[250px] truncate" title={product?.sku}> артикул: {product?.model} </p><Preorder isLogedIn={isLogedIn} product={product} /></>)}
 					
 					
 					<div>
