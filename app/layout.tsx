@@ -22,13 +22,13 @@ type Props = {
 
 export const revalidate = 60;
 
-export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const siteInfoData = await siteInfo();
   return {
-    title: siteInfoData.siteName
+    title: siteInfoData.siteName,
+    verification: {
+      yandex: '8ae623ba76e29d84'
+    }
   }
 }
 
