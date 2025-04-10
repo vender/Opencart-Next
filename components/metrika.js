@@ -26,7 +26,8 @@ export function Metrika() {
             clickmap:true,
             trackLinks:true,
             accurateTrackBounce:true,
-            webvisor:true
+            webvisor:true,
+            ecommerce:"dataLayer"
         });    
       `}
     </Script>
