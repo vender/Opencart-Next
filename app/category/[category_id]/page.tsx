@@ -7,19 +7,12 @@ import SearchTopBar from "#/components/ui/top-bar";
 import clsx from "clsx";
 import { getCategory, getProducts } from "#/lib";
 
-type Params = {
-  category_id: string;
-};
-
-type SearchParams = {
-  [key: string]: string; // filters like color=red,blue
-};
-
 const uniqArray = (array: any[]) =>
   [...new Map(array.map((item) => [JSON.stringify(item), item])).values()];
 
-export async function generateMetadata({ params }: { params: Params }) {
-  const category = await getCategory(params.category_id);
+export async function generateMetadata({ params }: { params: Promise<{ category_id: string }> }) {
+  const { category_id } = await params;
+  const category = await getCategory(category_id);
 
   return {
     title: category.name,
@@ -36,18 +29,19 @@ export default async function CategoryPage({
   params,
   searchParams,
 }: {
-  params: Params;
-  searchParams: SearchParams;
+  params: Promise<{ category_id: string }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const products = await getProducts(params.category_id);
-  const category = await getCategory(params.category_id);
+  const { category_id } = await params;
+  const search = await searchParams;
+  const products = await getProducts(category_id);
+  const category = await getCategory(category_id);
   
   const allParams = new Set<string>();
-  Object.values(searchParams).forEach((val) => {
-    val
-      .split(",")
-      .filter(Boolean)
-      .forEach((v) => allParams.add(v));
+  Object.values(search).forEach((val:any) => {
+    val.split(",")
+       .filter(Boolean)
+       .forEach((v:any) => allParams.add(v));
   });
 
   const attribs: any[] = [];
@@ -70,10 +64,6 @@ export default async function CategoryPage({
       });
     });
   });
-
-  console.log('Пример продукта:', products?.[0]);
-
-  // console.log(category);
 
   return (
     <Container>
