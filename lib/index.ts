@@ -527,6 +527,20 @@ export async function siteInfo() {
   return data?.siteInfo
 }
 
+export async function menu() {
+  const data = await fetchAPI(`
+    {
+      main_menu {
+        id
+        label
+        path
+        sort_order
+      }
+    }
+  `);
+  return data?.main_menu
+}
+
 export async function footers() {
   const data = await fetchAPI(`
     {

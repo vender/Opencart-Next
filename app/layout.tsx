@@ -5,7 +5,7 @@ import Footer from '#/components/footer/footer';
 import MobileNavigation from "#/components/navbar/mobile-navigation";
 import { Toaster } from 'react-hot-toast';
 import type { Metadata, ResolvingMetadata } from 'next'
-import { getCategories, getInformations, loggedIn, siteInfo, footers } from '#/lib';
+import { getCategories, getInformations, loggedIn, siteInfo, menu, footers } from '#/lib';
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic-ext'],
@@ -58,6 +58,7 @@ export default async function RootLayout({
   const subMenu = await getCategoryPages(categories);
   const isLogedIn = await loggedIn();
   const siteInfoData = await siteInfo();
+  const menuLinks = await menu();
   const footer_data = await footers();
 
   const infoPagesFiltered = infoPages.map((infoPage:any) =>{
@@ -76,9 +77,10 @@ export default async function RootLayout({
         label: "Каталог",
         subMenu: subMenu
       },
+      ...menuLinks,
       ...infoPagesFiltered
     ]
-  }
+  }  
 
   return (
     <html lang="ru" className={`${inter.variable}`}>
