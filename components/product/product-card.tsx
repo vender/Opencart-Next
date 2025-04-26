@@ -103,7 +103,7 @@ export default async function ProductCard({
 									variant === "list",
 							})}
 						>
-							{product?.name && product?.name.substring(0, 40)}
+							{product?.name && product?.name.substring(0, 60)}
 						</h2>
 					{product?.quantity != 0 ? (
 						<>

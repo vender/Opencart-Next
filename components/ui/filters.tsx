@@ -2,8 +2,9 @@
 import FilteredItem from "#/components/ui/filtered-item";
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import AttribFilter from "./attrib-filter";
+import { PriceFilter } from "#/components/price-filter"
 
-export default function ShopFilters({ attribute_groups, attribs }: any) {
+export default function ShopFilters({ attribute_groups, attribs, minPrice, maxPrice }: any) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams: any = useSearchParams();
@@ -14,6 +15,17 @@ export default function ShopFilters({ attribute_groups, attribs }: any) {
 			allParams.push([i, key]);
 		})
 	});
+
+	// Функция обработки изменения цены
+	const handlePriceChange = async (minPrice: number, maxPrice: number) => {
+		const params = new URLSearchParams(searchParams);
+		if (minPrice && maxPrice) {
+			params.set('price', `${minPrice}-${maxPrice}`);
+		} else {
+			params.delete('price');
+		}
+		router.push(`${pathname}?${params.toString()}`);
+	};
 
 	return (
 		<div className="pt-1">
@@ -33,6 +45,13 @@ export default function ShopFilters({ attribute_groups, attribs }: any) {
 					</button>
 				</div>
 				<div className="flex flex-wrap -m-1.5 pt-2">
+					
+				<PriceFilter
+					minPrice={minPrice}
+					maxPrice={maxPrice}
+					onPriceChange={handlePriceChange}
+				/>
+
 					{allParams.length > 0 &&
 						allParams.map((v: any, idx: any) =>
 						(

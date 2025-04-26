@@ -25,6 +25,15 @@ export async function generateMetadata({ params }: { params: Promise<{ category_
   };
 }
 
+function getMinMaxPrice(products:any) {
+  let prices = products.map((product:any) => parseFloat(product.price)); // Извлекаем цены как числа
+
+  let minPrice = Math.min(...prices); // Находим минимальную цену
+  let maxPrice = Math.max(...prices); // Находим максимальную цену
+
+  return { minPrice, maxPrice };
+}
+
 export default async function CategoryPage({
   params,
   searchParams,
@@ -34,10 +43,14 @@ export default async function CategoryPage({
 }) {
   const { category_id } = await params;
   const search = await searchParams;
-  const products = await getProducts(category_id);
+  const filter_price = search?.price ? search.price?.toString() : "";
+    
+  const products = await getProducts(category_id, filter_price);
   const category = await getCategory(category_id);
+
+  const { minPrice, maxPrice } = getMinMaxPrice(products);
   
-  const allParams = new Set<string>();
+  const allParams = new Set<string | string[]>();
   Object.values(search).forEach((val:any) => {
     val.split(",")
        .filter(Boolean)
@@ -48,6 +61,9 @@ export default async function CategoryPage({
   const attribute_groups: any[] = [];
   const filteredProd = new Set<number>();
 
+  // Фильтрация атрибутов, чтобы использовать только те, которые есть в category.attribs
+  const allowedAttributes = new Set(category.attribs.map((id: any) => Number(id)));
+  
   products?.forEach((product: any) => {
     product.attributes?.forEach((group: any) => {
       if (group.status != '1') return;
@@ -55,11 +71,17 @@ export default async function CategoryPage({
       group.attribute?.forEach((attr: any) => {
         if (!attr.text || attr.status === 0) return;
 
-        attribs.push(attr);
-        attribute_groups.push([attr.attribute_id, attr.name]);
+        // Преобразуем attr.attribute_id в число для корректного сравнения
+        const attributeId = Number(attr.attribute_id);
 
-        if (allParams.has(attr.text)) {
-          filteredProd.add(product.product_id);
+        // Проверяем, что attribute_id атрибута есть в списке разрешенных атрибутов
+        if (allowedAttributes.has(attributeId)) {
+          attribs.push(attr);
+          attribute_groups.push([attributeId, attr.name]);
+
+          if (allParams.has(attr.text)) {
+            filteredProd.add(product.product_id);
+          }
         }
       });
     });
@@ -71,14 +93,16 @@ export default async function CategoryPage({
         <Breadcrumb parent={category?.parent} title={category.name} />
       </div>
       <div className="flex pt-4 md:pt-8 pb-16 lg:pb-20">
-        {attribs.length > 0 && (
+        {/* {attribs.length > 0 && ( */}
           <div className="flex-shrink-0 pe-24 hidden lg:block w-96">
             <ShopFilters
               attribute_groups={uniqArray(attribute_groups)}
               attribs={uniqArray(attribs)}
+              minPrice={minPrice}
+              maxPrice={maxPrice}
             />
           </div>
-        )}
+        {/* )} */}
 
         <div className={clsx("w-full", attribs.length && "lg:-ms-9")}>
           <SearchTopBar category={category} />

@@ -285,16 +285,55 @@ export async function getCategory(id: number | string = 0) {
         status
       }
       attribs
+      products(start: 0, limit: 1000) {
+        attributes {
+          attribute_group_id
+          name
+          status
+          attribute {
+            attribute_id
+            name
+            text
+            status
+            display
+          }
+        }
+        product_id
+        name
+        model
+        sku
+        upc
+        mpn
+        quantity
+        image
+        in_stock
+        price
+        special
+        formatted_price
+        formatted_special
+        weight
+        rating
+        review_count
+        minimum
+        sort_order
+        status
+        wishlist
+        images {
+          product_image_id
+          image
+          sort_order
+        }
+      }
     }
   }
   `);
   return data?.category
 }
 
-export async function getProducts(parent: number | string) {
+export async function getProducts(parent: number | string, filter_price: string = '') {
   const data = await fetchAPI(`
   {
-    products(filter_category_id: ${parent} start: 0 limit: 300) {
+    products(filter_category_id: ${parent} filter_price: "${filter_price}" start: 0 limit: 500) {
       attributes {
         attribute_group_id
         name

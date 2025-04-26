@@ -24,6 +24,9 @@
 	p > a:hover {
 		@apply text-heading;
 	}
+  :root {
+		--radius: 0.5rem;
+	}
 }
 
 @layer components {
@@ -487,4 +490,7 @@
 .overlay.open {
 	@apply opacity-100;
 	visibility: visible;
+}
+.lg-backdrop {
+	@apply !bg-white;
 }

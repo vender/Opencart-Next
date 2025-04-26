@@ -7,9 +7,10 @@ interface TextProps {
 }
 
 const Prose: FunctionComponent<TextProps> = ({ html, className }) => {
+
   return (
     <>
-      {parse(parse(html) as any)}
+      {parse(html)}
     </>
   );
 };

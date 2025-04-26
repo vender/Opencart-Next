@@ -7,8 +7,9 @@ import Divider from "#/components/ui/divider";
 import Breadcrumb from "#/components/layout/breadcrumb";
 import { use } from 'react';
 
-export async function generateMetadata({ params, searchParams }: any) {
-    const product = await getProduct(params.product_id);
+export async function generateMetadata({ params }: { params: Promise<{ product_id: number }> }) {
+    const {product_id} = await params;
+    const product = await getProduct(product_id);
 
 	return {
 	  title: product.name,
