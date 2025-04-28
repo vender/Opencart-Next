@@ -24,7 +24,7 @@
 	p > a:hover {
 		@apply text-heading;
 	}
-  :root {
+  	:root {
 		--radius: 0.5rem;
 	}
 }

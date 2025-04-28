@@ -124,11 +124,9 @@ module.exports = {
     		cookies: '0 -2px 3px rgba(0, 0, 0, 0.04)'
     	},
     	fontFamily: {
-    		body: [
-    			'var(--font-inter)'
-    		],
+    		body: ['var(--font-inter)'],
     		satisfy: ["'Satisfy', cursive'"],
-    		segoe: ["'Segoe UI', sans-serif'"]
+    		segoe: ["'Segoe UI', sans-serif"]
     	}
     },
 	future: {
