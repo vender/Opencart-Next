@@ -494,3 +494,8 @@
 .lg-backdrop {
 	@apply !bg-white;
 }
+.product-description ul {
+	list-style: inherit;
+	margin: inherit;
+	padding: 0 0 0 20px;
+}

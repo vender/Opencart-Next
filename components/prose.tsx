@@ -9,9 +9,9 @@ interface TextProps {
 const Prose: FunctionComponent<TextProps> = ({ html, className }) => {
 
   return (
-    <>
+    <div className={className}>
       {parse(html)}
-    </>
+    </div>
   );
 };
 

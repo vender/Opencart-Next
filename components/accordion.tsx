@@ -84,7 +84,7 @@ export function Collapse({
 						>
 							{content && type == 'attrib' ?
 								<Attriblist content={content} /> :
-								(content && type == 'description' ? <Prose className="overflow-hidden" html={content} /> : content)
+								(content && type == 'description' ? <Prose className="product-description" html={content} /> : content)
 							}
 						</div>
 					</motion.div>
