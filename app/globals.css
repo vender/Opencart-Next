@@ -313,6 +313,13 @@
 	width: 16px;
 	background-color: #000;
 }
+.swiper-slide-thumb-active > div {
+	border: 2px solid #212121 !important;
+}
+.thumbsSwiper .swiper-slide > div {
+	@apply cursor-pointer relative max-h-[100px] overflow-hidden rounded-[3px] border-[2px] border-transparent hover:border-[#c7c7c7];
+}
+
 @media screen and (min-width: 480px) {
 	.carouselWrapper .swiper .swiper-pagination-bullets {
 		bottom: 20px;

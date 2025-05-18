@@ -22,7 +22,7 @@ async function fetchAPI(query = '', cache: RequestCache = 'default', variables:a
   
 
   try {
-    const res: any = await fetch(`${NEXT_PUBLIC_OPENCART_DOMAIN_URL}/index.php?route=api/graphql/usage&token=${NEXT_PUBLIC_OPENCART_API_TOKEN}`, {
+    const res: any = await fetch(`${NEXT_PUBLIC_OPENCART_DOMAIN_URL}/catalog/index.php?route=api/graphql/usage&token=${NEXT_PUBLIC_OPENCART_API_TOKEN}`, {
       method: 'POST',
       headers: sesHeaders,
       credentials: 'include',
@@ -667,6 +667,12 @@ export async function getProduct(id: number) {
           thumb
           sort_order
         }
+        videos {
+          product_video_id
+          video
+          video_thumb
+          sort_order
+        }  
         layout_id
       }
     }
@@ -674,17 +680,19 @@ export async function getProduct(id: number) {
   return data?.product
 }
 
-export async function getProductColors(sku: string) {
+export async function getProductColors(sku: string, upc: number) {
   const data = await fetchAPI(`
     {
       productColors(
         sku: "${sku}"
+        upc: ${upc}
       ) {
         product_id
         name
         model
         sku
         color_image
+        image
         price
         special
         formatted_price

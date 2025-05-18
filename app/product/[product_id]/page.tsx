@@ -26,7 +26,7 @@ export default async function ProductPage({ params }:any) {
     const related = await relatedProducts(product_id);
     const isLogedIn = await loggedIn();
 	const prodReviews = await reviews(product.product_id);
-    const Colors = await getProductColors(product.sku);
+    const Colors = await getProductColors(product.sku, product.upc);
 	const Options = await availableOptions(product.product_id);
     
     if(!product.product_id) {

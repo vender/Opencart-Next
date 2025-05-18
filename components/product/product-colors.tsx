@@ -7,7 +7,7 @@ interface Props {
     active?: number;
 	colors: {
 		product_id: number;
-        name: string;
+        image: string;
 		color_image: string;
 	}[];
 }
@@ -24,7 +24,7 @@ export default function ProductColors({
 				Цвета
 			</h3>
 			<ul className="colors flex flex-wrap -me-3">
-				{colors?.map(({ product_id, name, color_image }) => (
+				{colors?.map(({ product_id, image, color_image }) => (
                     <Link key={product_id} href={`/product/${product_id}`} >
                         <li
                             className={clsx(
@@ -34,7 +34,7 @@ export default function ProductColors({
                             )}
                         >
                             {product_id == active}
-                            <Image src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${color_image}`} alt="" width={44} height={44} priority className="h-full w-full rounded block"/>
+                            <Image src={`${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${color_image ? color_image : image}`} alt="" width={44} height={44} priority className="h-full w-full rounded block object-cover"/>
                         
                         </li>
                     </Link>

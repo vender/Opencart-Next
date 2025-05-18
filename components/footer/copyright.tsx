@@ -32,9 +32,17 @@ const payment:CopyrightProps[] = [
 		id: 3,
 		path: "/",
 		image: "/assets/images/payment/mir-logo.svg",
-		name: "payment-paypal",
+		name: "payment-mir",
 		width: 76,
 		height: 20,
+	},
+	{
+		id: 4,
+		path: "https://xn--80ajghhoc2aj1c8b.xn--p1ai/",
+		image: "/assets/images/chestniy_znak.svg",
+		name: "chestniy_znak",
+		width: 110,
+		height: 25,
 	}
 ];
 
