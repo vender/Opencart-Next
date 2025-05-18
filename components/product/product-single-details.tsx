@@ -105,6 +105,16 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 			type: 'description',
 			content: product.description
 		},
+		{
+			title: 'Характеристики',
+			type: 'attrib',
+			content: product.attributes
+		},
+		{
+			title: 'Отзывы',
+			type: 'review',
+			product_id: product.product_id
+		}
 	]
 
 	return (
@@ -176,7 +186,7 @@ export default function ProductSingleDetails({ product, isLogedIn, prodReviews, 
 						}
 					</div>
 				</form>
-				<ProductMetaReview data={productData} isLogedIn={isLogedIn} prodReviews={false} />
+				<ProductMetaReview data={productData} isLogedIn={isLogedIn} prodReviews={prodReviews} />
 				<AskQuestion productName={product?.name} />
 			</div>
 		</div>
