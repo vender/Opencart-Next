@@ -171,11 +171,51 @@ export async function addItemToCart(product_id: number, quantity: number, option
   return data?.addItemToCart
 }
 
-export async function removeFromCart(cart_id: any) {
+export async function removeFromCart(cart_id: string|null) {
   const data = await fetchAPI(`
     mutation {
-      deleteCartItem(cart_id: ${cart_id})
+  deleteCartItem(cart_id: ${cart_id}) {
+    weight
+    tax
+    total
+    count
+    subtotal
+    coupon_discount
+    coupon_code
+    has_stock
+    has_shipping
+    has_download
+    totals {
+      code
+      title
+      value
+      sort_order
     }
+    items {
+      cart_id
+      product_id
+      name
+      model
+      shipping
+      image
+      quantity
+      minimum
+      subtract
+      stock
+      price
+      total
+      reward
+      points
+      tax_class_id
+      weight
+      weight_class_id
+      length
+      width
+      height
+      length_class_id
+    }
+  }
+}
     `, 'no-store',);
 
   return data?.addItemToCart
@@ -184,7 +224,47 @@ export async function removeFromCart(cart_id: any) {
 export async function updateCartItem(cart_id: any, quantity: number) {
   const data = await fetchAPI(`
     mutation {
-      updateCartItem(cart_id: ${cart_id}, quantity: ${quantity})
+      updateCartItem(cart_id: ${cart_id}, quantity: ${quantity}) {
+        weight
+        tax
+        total
+        count
+        subtotal
+        coupon_discount
+        coupon_code
+        has_stock
+        has_shipping
+        has_download
+        totals {
+          code
+          title
+          value
+          sort_order
+        }
+        items {
+          cart_id
+          product_id
+          name
+          model
+          shipping
+          image
+          quantity
+          minimum
+          subtract
+          stock
+          price
+          total
+          reward
+          points
+          tax_class_id
+          weight
+          weight_class_id
+          length
+          width
+          height
+          length_class_id
+        }
+      }
     }  
     `, 'no-store',);
 
@@ -667,6 +747,12 @@ export async function getProduct(id: number) {
           thumb
           sort_order
         }
+        videos {
+          product_video_id
+          video
+          video_thumb
+          sort_order
+        }  
         layout_id
       }
     }
@@ -674,17 +760,19 @@ export async function getProduct(id: number) {
   return data?.product
 }
 
-export async function getProductColors(sku: string) {
+export async function getProductColors(sku: string, upc: number) {
   const data = await fetchAPI(`
     {
       productColors(
         sku: "${sku}"
+        upc: ${upc}
       ) {
         product_id
         name
         model
         sku
         color_image
+        image
         price
         special
         formatted_price
