@@ -16,17 +16,17 @@ export default function Widgets({ widgets, data }:any) {
 			<div className="row">
 				<div className="text-xl">
 					<div className="mb-1">
-						<a href="tel:+79183330100">+7 918 333 01 00</a> <sup>для партнеров</sup><br/>
-						<a href="tel:+79262882925">+7 988 888 10 48</a> <sup>розница</sup>
+						<a href="tel:+7XXXXXXXX">+7 XXX XXX XX XX</a> <sup>для партнеров</sup><br/>
+						<a href="tel:+7XXXXXXXX">+7 XXX XXX XX XX</a> <sup>розница</sup>
 					</div>
 					<div className="text-base">
-						<a href="mailto:89183330100@mail.ru">89183330100@mail.ru</a>
+						<a href="mailto:XXXXXXX@mail.ru">XXXXXX@mail.ru</a>
 					</div>
 				</div>
 				<div className="mt-5 font-light">
-					<div className="">353202, Краснодарский край,<br/> ст.Динская, пер.Дружбы, д. 2</div>
+					<div className="">XXXXXX, Краснодарский край,<br/> ст.Динская, </div>
 					<div className="my-5">График работы:<br/>пн−пт с 9:00 до 19:00</div>
-					<div className="">ИП Лебедкик Николай Викторович<br/>ИНН 233001735008<br/>ОГРНИП 304233013500088</div>
+					<div className="">ИП XXXXXX<br/>ИНН XXXXXXX<br/>ОГРНИП XXXXXXXXXX</div>
 				</div>
 			</div>
 			</div>
