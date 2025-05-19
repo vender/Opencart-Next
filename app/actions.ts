@@ -10,7 +10,7 @@ export async function sendQuestion(
   }
 
   const formdata = new FormData();
-  formdata.append("chat_id", "-1002396476133");
+  formdata.append("chat_id", `${process.env.NEXT_PUBLIC_TELEGRAM_CHAT_ID}`);
   formdata.append("parse_mode", "HTML");
   formdata.append("text", `Вопрос c сайта: ${Data.get("productName")} \n\n<b>${Data.get("name")}</b> \n<u>${Data.get("email")}</u> \n<i>${Data.get("message")}</i>`);
 
@@ -21,7 +21,7 @@ export async function sendQuestion(
   };
 
   try {
-    const response = await fetch("https://api.telegram.org/bot7515447070:AAGj47h5dcgNEUZtyBEE9eqJm4rgppjlND0/sendMessage", requestOptions);
+    const response = await fetch(`https://api.telegram.org/bot${process.env.NEXT_PUBLIC_TELEGRAM_BOT_TOKEN}/sendMessage`, requestOptions);
     const result = await response.text();
     return {message: "Сообщение отправлено, спасибо!"};
   } catch (error) {
