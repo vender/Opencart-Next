@@ -24,7 +24,7 @@ export default function ProductGallery({ product }: any) {
           mode="lg-fade"
           selector={".product-gallery-image"}
           download={false}
-          zoom={false}
+          zoom={true}
           backgroundColor="#ffffff"
         >
         <Carousel
@@ -40,16 +40,17 @@ export default function ProductGallery({ product }: any) {
           {images?.map((item: any, index: number) => {
             return (
               <SwiperSlide key={`product-gallery-key-${index}`} className="col-span-1 !flex justify-center items-center">
-                  <Image
-                    data-src={item?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${item?.image}` : "/assets/placeholder/products/product-gallery.svg"}
-                    src={item?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${item?.image}` : "/assets/placeholder/products/product-gallery.svg"}
-                    onError={(e) => { e.currentTarget.src = "/assets/placeholder/products/product-gallery.svg"; }}
-                    width={400}
-                    height={400}
-                    alt={`${name}--${index}`}
-                    loading="lazy"
-                    className="object-cover w-auto max-h-[600px] product-gallery-image"
-                  />
+                  <div className="product-gallery-image" data-src={item?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${item?.image}` : "/assets/placeholder/products/product-gallery.svg"}>
+                    <Image
+                      src={item?.image ? `${process.env.NEXT_PUBLIC_OPENCART_DOMAIN_URL}/image/${item?.image}` : "/assets/placeholder/products/product-gallery.svg"}
+                      onError={(e) => { e.currentTarget.src = "/assets/placeholder/products/product-gallery.svg"; }}
+                      width={400}
+                      height={400}
+                      alt={`${name}--${index}`}
+                      loading="lazy"
+                      className="object-cover w-auto max-h-[600px]"
+                    />
+                  </div>
               </SwiperSlide>
             );
           })}

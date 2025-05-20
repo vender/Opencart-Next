@@ -14,8 +14,8 @@ export default async function Home() {
     <>
       <Banners banners={sliderhome} />
       <div className="mx-auto max-w-[1920px] px-4 md:px-8 2xl:px-16">
-        <BannerCarouselBlock banners={banners} />
         <CategoryBlock categories={categories} type="rounded" sectionHeading="Категории товаров" />
+        <BannerCarouselBlock banners={banners} />
         <NewArrivalsProductFeed latestProducts={latestProducts} />
       </div>
     </>
