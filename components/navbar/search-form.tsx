@@ -26,7 +26,7 @@ export default function Searchform({ className, displaySearch, setSearch, ...res
 						<div className="flex flex-col mx-auto mb-1.5 w-full ">
                             <form
                                 action={`/search`}
-                                className="relative pe-12 md:pe-14 bg-white overflow-hidden rounded-md w-full"
+                                className="relative ltr:pr-12 ltr:md:pr-14 rtl:pl-12 rtl:md:pl-14 bg-white overflow-hidden rounded-md w-full"
                                 noValidate
                                 role="search"
                             >

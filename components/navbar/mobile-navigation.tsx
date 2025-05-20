@@ -7,19 +7,14 @@ import Cart from '#/components/cart';
 import CartIcon from '#/components/icons/cart';
 import AuthMenu from "#/components/navbar/auth-menu";
 import Mobiledrawer from "#/components/navbar/mobile-menu";
+import SearchBox from './search-box';
 
 export default async function MobileNavigation({mainMenu, isLogedIn, siteInfo}:any) {
 
 	return (
-		<div className="md:hidden fixed z-10 bottom-0 flex items-center justify-between shadow-bottomNavigation text-gray-700 body-font bg-white w-full h-14 sm:h-16 px-4">
+		<div className="md:hidden fixed z-30 bottom-0 flex items-center justify-between shadow-bottomNavigation text-gray-700 body-font bg-white w-full h-14 sm:h-16 px-4">
 			<Mobiledrawer mainMenu={mainMenu} siteInfo={siteInfo} />
-			<button
-				className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none"
-				// onClick={openSearch}
-				aria-label="search-button"
-			>
-				<SearchIcon />
-			</button>
+			<SearchBox />
 			<Link href="/" className="flex-shrink-0">
 				<HomeIcon />
 			</Link>
