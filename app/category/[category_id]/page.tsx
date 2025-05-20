@@ -93,7 +93,6 @@ export default async function CategoryPage({
         <Breadcrumb parent={category?.parent} title={category.name} />
       </div>
       <div className="flex pt-4 md:pt-8 pb-16 lg:pb-20">
-        {/* {attribs.length > 0 && ( */}
           <div className="flex-shrink-0 pe-24 hidden lg:block w-96">
             <ShopFilters
               attribute_groups={uniqArray(attribute_groups)}
@@ -102,10 +101,15 @@ export default async function CategoryPage({
               maxPrice={maxPrice}
             />
           </div>
-        {/* )} */}
 
         <div className={clsx("w-full", attribs.length && "lg:-ms-9")}>
-          <SearchTopBar category={category} />
+          <SearchTopBar 
+            category={category}
+            attribute_groups={uniqArray(attribute_groups)}
+            attribs={uniqArray(attribs)}
+            minPrice={minPrice}
+            maxPrice={maxPrice}
+          />
           <ProductGrid
             products={products}
             filterdProd={uniqArray(Array.from(filteredProd))}

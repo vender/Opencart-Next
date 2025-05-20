@@ -1,14 +1,12 @@
 import React from 'react'
 import { motion } from 'framer-motion';
-import "rc-drawer/assets/index.css";
 import Link from 'next/link';
 import { IoClose } from "react-icons/io5";
 import CartItem from "./cart-item";
 import EmptyCart from "./empty-cart";
 import { fadeInOut } from "#/components/ui/motion/fade-in-out";
 import clsx from "clsx";
-import Drawer from 'rc-drawer';
-import motionProps from '#/components/ui/motion/motion';
+import VaulDrawer from "#/components/layout/Drawer";
 
 export default function Cartdrawer({
     isOpen,
@@ -20,11 +18,11 @@ export default function Cartdrawer({
     cart: any;
 }) {
     return (
-        <Drawer
+        <VaulDrawer
             open={isOpen}
             placement="right"
             onClose={onClose}
-            {...motionProps}
+            contentClass="right-0 top-0 bottom-0 fixed z-[100] h-full outline-none bg-white"
         >
             <div className="flex flex-col w-full h-full justify-between">
                 <div className="w-full flex justify-between items-center relative ps-5 md:ps-7 py-0.5 border-b border-gray-100">
@@ -90,6 +88,6 @@ export default function Cartdrawer({
                     }
                 </div>
             </div>
-        </Drawer>
+        </VaulDrawer>
     )
 }

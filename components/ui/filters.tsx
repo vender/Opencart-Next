@@ -1,10 +1,11 @@
 "use client"
 import FilteredItem from "#/components/ui/filtered-item";
+import { IoClose } from "react-icons/io5";
 import { usePathname, useSearchParams, useRouter } from 'next/navigation'
 import AttribFilter from "./attrib-filter";
 import { PriceFilter } from "#/components/price-filter"
 
-export default function ShopFilters({ attribute_groups, attribs, minPrice, maxPrice }: any) {
+export default function ShopFilters({ attribute_groups, attribs, minPrice, maxPrice, onClose, mobile = false }: any) {
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams: any = useSearchParams();
@@ -28,7 +29,7 @@ export default function ShopFilters({ attribute_groups, attribs, minPrice, maxPr
 	};
 
 	return (
-		<div className="pt-1">
+		<div className={`${mobile ? 'p-4' : 'pt-1'}`}>
 			<div className="block border-b border-gray-300 pb-7 mb-7">
 				<div className="flex items-center justify-between mb-2.5">
 					<h2 className="font-semibold text-heading text-xl md:text-2xl">
@@ -43,6 +44,13 @@ export default function ShopFilters({ attribute_groups, attribs, minPrice, maxPr
 					>
 						очистить
 					</button>
+					{mobile && <button
+                        className="flex text-2xl items-center justify-center text-gray-500 px-4 md:px-6 py-6 focus:outline-none transition-opacity hover:opacity-60"
+                        onClick={onClose}
+                        aria-label="close"
+                    >
+                        <IoClose className="text-black mt-1 md:mt-0.5" />
+                    </button>}
 				</div>
 				<div className="flex flex-wrap -m-1.5 pt-2">
 					
