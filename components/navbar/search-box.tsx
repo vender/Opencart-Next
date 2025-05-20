@@ -6,15 +6,11 @@ import Searchform from "./search-form";
 export default function SearchBox() {
 	const [ displaySearch, setSearch ] = useState(false) as any;
 
-	const openSearch = () => {
-		setSearch(true)
-	}
-
 	return (
 		<>
 			<button
 				className="flex items-center justify-center flex-shrink-0 h-auto relative focus:outline-none transform"
-				onClick={openSearch}
+				onClick={() => setSearch(true)}
 				aria-label="search-button"
 				>
 				<SearchIcon />

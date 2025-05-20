@@ -686,6 +686,7 @@ export async function getProduct(id: number) {
             name
             text
             status
+            display
           } 
         }
         options {
