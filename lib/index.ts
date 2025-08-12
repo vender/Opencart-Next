@@ -765,7 +765,6 @@ export async function getProductColors(sku: string, upc: number) {
     {
       productColors(
         sku: "${sku}"
-        upc: ${upc}
       ) {
         product_id
         name
